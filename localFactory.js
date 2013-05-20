@@ -95,7 +95,11 @@ yourModuleVariable.factory("$store",function(){
 		 * @returns {*} - returns whatever the stored value is
 		 */
 		bind: function($scope,key,def){
-			$scope[key] = (typeof publicMethods.get(key) !== "undefined") ? publicMethods.get(key) : false;
+			def = def || false;
+			if(!publicMethods.get(key)){
+				publicMethods.set(key,def);
+			}
+			$scope[key] = publicMethods.get(key);
 			$scope.$watch(key,function(val){
 				publicMethods.set(key,val);
 			},true);
