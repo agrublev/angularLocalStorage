@@ -1,7 +1,8 @@
 Angular-localStorage
 ====================
 
-The simplest localStorage implementation you will ever use. Allowing you to set,get, and *bind* variables.
+The simplest localStorage implementation you will ever use. Allowing you to set,get, and *bind* variables. For live 
+example please checkout http://jsfiddle.net/agrublev/QjVq3/
 
 Instead of being a stand alone module that you have to deal with including in your application it's provided as a factory
 that you can quickly and easily add to your own application module.
