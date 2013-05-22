@@ -1,5 +1,5 @@
 // yourModuleVariable would be something like var yourModuleVariable = angular.module('yourModuleVariable',...
-yourModuleVariable.factory("$store",function(){
+yourModuleVariable.factory("$store",function($parse){
 	/**
 	 * Global Vars
 	 */
@@ -104,7 +104,27 @@ yourModuleVariable.factory("$store",function(){
 				publicMethods.set(key,val);
 			},true);
 			return publicMethods.get(key);
+		},
+		/**
+		 * BindObj - lets you directly bind a localStorage value to a $scope (sub-)object
+		 * @param $scope - the current scope you want the variable available in
+		 * @param key - the accessor string
+		 * @param obj - an Angular expression string denoting the object in $scope you are binding
+		 * @param def - the default value (OPTIONAL)
+		 * @returns {*} - returns whatever the stored value is
+		 */
+		bindObj: function($scope,key,obj,def){
+			def = def || false;
+			if(!publicMethods.get(key)){
+				publicMethods.set(key,def);
+			}
+			$parse(obj).assign($scope, publicMethods.get(key));
+			$scope.$watch(obj,function(val){
+				publicMethods.set(key,val);
+			},true);
+			return publicMethods.get(key);
 		}
+
 	};
 	return publicMethods;
 });
