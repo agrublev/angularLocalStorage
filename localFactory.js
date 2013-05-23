@@ -88,23 +88,23 @@ yourModuleVariable.factory("$store",function(){
 			return true;
 		},
 		/**
-		 * Bind - let's you directly bind a localStorage value to a $scope variable
-		 * @param $scope - the current scope you want the variable available in
-		 * @param key - the name of the variable you are binding
-		 * @param def - the default value (OPTIONAL)
-		 * @returns {*} - returns whatever the stored value is
-		 */
-		bind: function($scope,key,def){
-			def = def || false;
-			if(!publicMethods.get(key)){
-				publicMethods.set(key,def);
-			}
-			$scope[key] = publicMethods.get(key);
-			$scope.$watch(key,function(val){
-				publicMethods.set(key,val);
-			},true);
-			return publicMethods.get(key);
-		}
+	         * Bind - let's you directly bind a localStorage value to a $scope variable
+	         * @param $scope - the current scope you want the variable available in
+	         * @param key - the name of the variable you are binding
+	         * @param def - the default value (OPTIONAL)
+	         * @returns {*} - returns whatever the stored value is
+	         */
+	        bind: function ($scope, key, def) {
+	            def = def || '';
+	            if (!publicMethods.get(key)) {
+	                publicMethods.set(key, def);
+	            }
+	            $parse(key).assign($scope, publicMethods.get(key));
+	            $scope.$watch(key, function (val) {
+	                publicMethods.set(key, val);
+	            }, true);
+	            return publicMethods.get(key);
+	        }
 	};
 	return publicMethods;
 });
