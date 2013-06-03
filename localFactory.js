@@ -1,5 +1,5 @@
 // yourModuleVariable would be something like var yourModuleVariable = angular.module('yourModuleVariable',...
-yourModuleVariable.factory("$store",function(){
+yourModuleVariable.factory("$store",function($parse){
 	/**
 	 * Global Vars
 	 */
