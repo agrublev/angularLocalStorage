@@ -1,5 +1,6 @@
-// yourModuleVariable would be something like var yourModuleVariable = angular.module('yourModuleVariable',...
-yourModuleVariable.factory("$store",function($parse){
+ls = angular.module('localStorage',[]);
+ 
+ls.factory("$store",function($parse){
 	/**
 	 * Global Vars
 	 */
