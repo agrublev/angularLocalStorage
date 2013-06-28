@@ -14,9 +14,9 @@ bind your localStorage value to a $scope variable which will be updated whenever
 If you are unsure on how to use it read this:
 
 1. Your application most likely has a line where you set it as a variable containing your module
-`var yourApp = angular.module('yourApp',... `
-2. Using this same variable attach the factory i've provided as a stand alone file like this
-`yourApp.factory("$store",function(){`
+`var yourApp = angular.module('yourApp', [...] `
+2. Just add this module to your app as a dependency
+`var yourApp = angular.module('yourApp', [..., 'localStorage'] `
 3. Now inside your controllers simply pass the $store like this
 `yourApp.controller('yourController',function( $scope, $store){`
 4. Using the $store factory
