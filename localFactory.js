@@ -1,6 +1,5 @@
-ls = angular.module('localStorage',[]);
- 
-ls.factory("$store",function($parse){
+angular.module('localStorage',[])
+.factory("$store",function($parse){
 	/**
 	 * Global Vars
 	 */
