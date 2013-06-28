@@ -1,15 +1,12 @@
 Angular-localStorage
 ====================
 
-The simplest localStorage implementation you will ever use. Allowing you to set,get, and *bind* variables. For live 
+The simplest localStorage module you will ever use. Allowing you to set,get, and *bind* variables. For live 
 example please checkout http://jsfiddle.net/agrublev/QjVq3/
 
-Instead of being a stand alone module that you have to deal with including in your application it's provided as a factory
-that you can quickly and easily add to your own application module.
-
-Another difference between this solution and others is that you can directly store Objects, Arrays, Floats,
-Booleans, and Strings. No need to convert your objects to strings and then reverse that. You can also
-bind your localStorage value to a $scope variable which will be updated whenever the lS is updated, and vice versa.
+Features:
+* Two way bind your $scope variable value to a localStorage which will be updated whenever the model is updated, and vice versa.
+* You can directly store Objects, Arrays, Floats, Booleans, and Strings. No need to convert your objects to strings and then reverse them. 
 
 If you are unsure on how to use it read this:
 
