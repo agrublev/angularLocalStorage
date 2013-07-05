@@ -1,10 +1,9 @@
-angular.module('localStorage',[])
-.factory("$store",function($parse){
+angular.module('localStorage',[]).factory('$store', function ($parse) {
 	/**
 	 * Global Vars
 	 */
 	var storage = (typeof window.localStorage === 'undefined') ? undefined : window.localStorage,
-		supported = !(typeof storage == 'undefined' || typeof window.JSON == 'undefined');
+		supported = !(typeof storage === 'undefined' || typeof window.JSON === 'undefined');
 
 	var privateMethods = {
 		/**
@@ -12,20 +11,20 @@ angular.module('localStorage',[])
 		 * @param res - a string that will be parsed for type
 		 * @returns {*} - whatever the real type of stored value was
 		 */
-		parseValue: function(res) {
+		parseValue: function (res) {
 			var val;
 			try {
 				val = JSON.parse(res);
-				if (typeof val == 'undefined'){
+				if (typeof val === 'undefined'){
 					val = res;
 				}
-				if (val == 'true'){
+				if (val === 'true'){
 					val = true;
 				}
-				if (val == 'false'){
+				if (val === 'false'){
 					val = false;
 				}
-				if (parseFloat(val) == val && !angular.isObject(val) ){
+				if (parseFloat(val) === val && !angular.isObject(val) ){
 					val = parseFloat(val);
 				}
 			} catch(e){
@@ -41,7 +40,7 @@ angular.module('localStorage',[])
 		 * @param value - the value of the localStorage item
 		 * @returns {*} - will return whatever it is you've stored in the local storage
 		 */
-		set: function(key,value){
+		set: function (key,value) {
 			if (!supported){
 				try {
 					$.cookie(key, value);
@@ -51,7 +50,7 @@ angular.module('localStorage',[])
 				}
 			}
 			var saver = JSON.stringify(value);
-			 storage.setItem(key, saver);
+			storage.setItem(key, saver);
 			return privateMethods.parseValue(saver);
 		},
 		/**
@@ -59,11 +58,11 @@ angular.module('localStorage',[])
 		 * @param key - the string that you set as accessor for the pair
 		 * @returns {*} - Object,String,Float,Boolean depending on what you stored
 		 */
-		get: function(key){
-			if (!supported){
+		get: function (key) {
+			if (!supported) {
 				try {
 					return privateMethods.parseValue($.cookie(key));
-				} catch(e){
+				} catch (e) {
 					return null;
 				}
 			}
@@ -75,12 +74,12 @@ angular.module('localStorage',[])
 		 * @param key - the accessor value
 		 * @returns {boolean} - if everything went as planned
 		 */
-		remove: function(key) {
+		remove: function (key) {
 			if (!supported){
 				try {
 					$.cookie(key, null);
 					return true;
-				} catch(e){
+				} catch (e) {
 					return false;
 				}
 			}
@@ -88,23 +87,23 @@ angular.module('localStorage',[])
 			return true;
 		},
 		/**
-	         * Bind - let's you directly bind a localStorage value to a $scope variable
-	         * @param $scope - the current scope you want the variable available in
-	         * @param key - the name of the variable you are binding
-	         * @param def - the default value (OPTIONAL)
-	         * @returns {*} - returns whatever the stored value is
-	         */
-	        bind: function ($scope, key, def) {
-	            def = def || '';
-	            if (!publicMethods.get(key)) {
-	                publicMethods.set(key, def);
-	            }
-	            $parse(key).assign($scope, publicMethods.get(key));
-	            $scope.$watch(key, function (val) {
-	                publicMethods.set(key, val);
-	            }, true);
-	            return publicMethods.get(key);
-	        }
+		 * Bind - let's you directly bind a localStorage value to a $scope variable
+		 * @param $scope - the current scope you want the variable available in
+		 * @param key - the name of the variable you are binding
+		 * @param def - the default value (OPTIONAL)
+		 * @returns {*} - returns whatever the stored value is
+		 */
+		bind: function ($scope, key, def) {
+			def = def || '';
+			if (!publicMethods.get(key)) {
+				publicMethods.set(key, def);
+			}
+			$parse(key).assign($scope, publicMethods.get(key));
+			$scope.$watch(key, function (val) {
+				publicMethods.set(key, val);
+			}, true);
+			return publicMethods.get(key);
+		}
 	};
 	return publicMethods;
 });
