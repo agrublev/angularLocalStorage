@@ -1,4 +1,4 @@
-angular.module('localStorage',[]).factory('$store', function ($parse) {
+angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse, $cookieStore) {
 	/**
 	 * Global Vars
 	 */
@@ -33,6 +33,7 @@ angular.module('localStorage',[]).factory('$store', function ($parse) {
 			return val;
 		}
 	};
+
 	var publicMethods = {
 		/**
 		 * Set - let's you set a new localStorage key pair set
@@ -43,16 +44,17 @@ angular.module('localStorage',[]).factory('$store', function ($parse) {
 		set: function (key,value) {
 			if (!supported){
 				try {
-					$.cookie(key, value);
+					$cookieStore.put(key, value);
 					return value;
 				} catch(e){
-					console.log('Local Storage not supported, make sure you have the $.cookie supported.');
+					console.log('Local Storage not supported, make sure you have angular-cookies enabled.');
 				}
 			}
 			var saver = JSON.stringify(value);
 			storage.setItem(key, saver);
 			return privateMethods.parseValue(saver);
 		},
+
 		/**
 		 * Get - let's you get the value of any pair you've stored
 		 * @param key - the string that you set as accessor for the pair
@@ -69,6 +71,7 @@ angular.module('localStorage',[]).factory('$store', function ($parse) {
 			var item = storage.getItem(key);
 			return privateMethods.parseValue(item);
 		},
+
 		/**
 		 * Remove - let's you nuke a value from localStorage
 		 * @param key - the accessor value
@@ -77,7 +80,7 @@ angular.module('localStorage',[]).factory('$store', function ($parse) {
 		remove: function (key) {
 			if (!supported){
 				try {
-					$.cookie(key, null);
+					$cookieStore.remove(key);
 					return true;
 				} catch (e) {
 					return false;
@@ -86,6 +89,7 @@ angular.module('localStorage',[]).factory('$store', function ($parse) {
 			storage.removeItem(key);
 			return true;
 		},
+
 		/**
 		 * Bind - let's you directly bind a localStorage value to a $scope variable
 		 * @param $scope - the current scope you want the variable available in
