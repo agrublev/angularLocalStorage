@@ -1,5 +1,5 @@
 {
-  "name": "Angular-localStorage",
+  "name": "angular-localStorage",
   "version": "0.1.0",
   "main": "localFactory.js",
   "ignore": [
