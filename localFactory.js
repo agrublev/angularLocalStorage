@@ -2,8 +2,8 @@ angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse
 	/**
 	 * Global Vars
 	 */
-	var storage = (typeof window.localStorage === 'undefined') ? undefined : window.localStorage,
-		supported = !(typeof storage === 'undefined' || typeof window.JSON === 'undefined');
+	var storage = (typeof window.localStorage === 'undefined') ? undefined : window.localStorage;
+	var supported = !(typeof storage === 'undefined' || typeof window.JSON === 'undefined');
 
 	var privateMethods = {
 		/**
@@ -15,16 +15,16 @@ angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse
 			var val;
 			try {
 				val = JSON.parse(res);
-				if (typeof val === 'undefined'){
+				if (typeof val === 'undefined') {
 					val = res;
 				}
-				if (val === 'true'){
+				if (val === 'true') {
 					val = true;
 				}
-				if (val === 'false'){
+				if (val === 'false') {
 					val = false;
 				}
-				if (parseFloat(val) === val && !angular.isObject(val) ){
+				if (parseFloat(val) === val && !angular.isObject(val) ) {
 					val = parseFloat(val);
 				}
 			} catch(e){
@@ -41,12 +41,12 @@ angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse
 		 * @param value - the value of the localStorage item
 		 * @returns {*} - will return whatever it is you've stored in the local storage
 		 */
-		set: function (key,value) {
-			if (!supported){
+		set: function (key, value) {
+			if (!supported) {
 				try {
 					$cookieStore.put(key, value);
 					return value;
-				} catch(e){
+				} catch(e) {
 					console.log('Local Storage not supported, make sure you have angular-cookies enabled.');
 				}
 			}
@@ -78,7 +78,7 @@ angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse
 		 * @returns {boolean} - if everything went as planned
 		 */
 		remove: function (key) {
-			if (!supported){
+			if (!supported) {
 				try {
 					$cookieStore.remove(key);
 					return true;

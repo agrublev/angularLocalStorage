@@ -1,0 +1,14 @@
+{
+  "name": "Angular-localStorage",
+  "version": "0.1.0",
+  "main": "localFactory.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "angular": "~1.0.7",
+    "angular-cookies": "~1.0.7"
+  }
+}

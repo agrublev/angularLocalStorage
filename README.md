@@ -1,14 +1,15 @@
 Angular-localStorage
 ====================
 
-The simplest localStorage module you will ever use. Allowing you to set,get, and *bind* variables. For live 
-example please checkout http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=preview
+The simpliest localStorage module you will ever use. Allowing you to set,get, and *bind* variables.
 
-Features:
+## Features:
+
 * Two way bind your $scope variable value to a localStorage which will be updated whenever the model is updated, and vice versa.
-* You can directly store Objects, Arrays, Floats, Booleans, and Strings. No need to convert your objects to strings and then reverse them. 
+* You can directly store Objects, Arrays, Floats, Booleans, and Strings. No need to convert your objects to strings and then reverse them.
+* Fallback to Angular ``$cookies`` if localStorage is not supported (REMEMBER to add ``angular-cookies.min.js`` script to your project or remove ``'ngCookies'`` from a dependency);
 
-If you are unsure on how to use it read this:
+## How to use
 
 1. Your application most likely has a line where you set it as a variable containing your module
 `var yourApp = angular.module('yourApp', [...] `
@@ -31,5 +32,19 @@ If you are unsure on how to use it read this:
   $store.get("key");
   ```
 
-please do add issues for ideas or improvements!
+### Bower
+
+Script is also available as bower package, install it with such command:
+
+```bash
+bower install Angular-localStorage
+```
+
+## Example
+
+For live example please checkout http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=preview
+
+## To do
+
+Some unit tests will be highly appreciated. Please add issues for ideas or improvements! Thanks!
 
