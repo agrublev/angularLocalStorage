@@ -44,7 +44,7 @@ For live example please checkout - http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=p
 
 ## To do
 
-Some unit tests will be highly appreciated. Please add issues for ideas or improvements! Thanks!
+Please add issues for ideas or improvements! Thanks!
 
 ## Contributors
 
@@ -54,7 +54,7 @@ Some unit tests will be highly appreciated. Please add issues for ideas or impro
  active   : 7 days
  commits  : 21
  files    : 3
- authors  : 
+ authors  :
     14  agrublev                66.7%
      5	Dmitri Voronianski      23.8%
      2	Alex Knol               9.5%
