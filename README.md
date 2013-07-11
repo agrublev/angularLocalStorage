@@ -46,15 +46,6 @@ For live example please checkout - http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=p
 
 Please add issues for ideas or improvements! Thanks!
 
-## Contributors
-
-```bash
- authors  :
-    14  agrublev                53.8%
-    10  Dmitri Voronianski      38.5%
-     2  Alex Knol               7.7%
-```
-
 ---
 
 (c) 2013 MIT License
