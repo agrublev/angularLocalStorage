@@ -34,7 +34,7 @@ describe('angular-localStorage module', function () {
 		});
 
 		it('should not contain value', function () {
-			expect(testValue).toEqual(null);
+			expect(testValue).toBeNull();
 		});
 	});
 });

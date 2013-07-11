@@ -24,10 +24,10 @@ angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse
 				if (val === 'false') {
 					val = false;
 				}
-				if (parseFloat(val) === val && !angular.isObject(val) ) {
+				if (parseFloat(val) === val && !angular.isObject(val)) {
 					val = parseFloat(val);
 				}
-			} catch(e){
+			} catch (e) {
 				val = res;
 			}
 			return val;
