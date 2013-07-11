@@ -51,13 +51,13 @@ Please add issues for ideas or improvements! Thanks!
 ```bash
  project  : Angular-localStorage
  repo age : 7 weeks
- active   : 7 days
- commits  : 21
- files    : 3
+ active   : 9 days
+ commits  : 26
+ files    : 16
  authors  :
-    14  agrublev                66.7%
-     5	Dmitri Voronianski      23.8%
-     2	Alex Knol               9.5%
+    14  agrublev                53.8%
+    10  Dmitri Voronianski      38.5%
+     2  Alex Knol               7.7%
 ```
 
 ---
