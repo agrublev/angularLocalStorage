@@ -24,7 +24,35 @@ describe('angular-localStorage module', function () {
 		});
 	});
 
-	describe('when remove() value from localStorage', function () {
+	describe('when bind() $scope field to localStorage', function () {
+		var scope;
+
+		beforeEach(function () {
+			inject(function ($rootScope) {
+				scope = $rootScope.$new();
+
+				scope.$apply(function () {
+					scope.spec = true;
+				});
+
+				$store.bind(scope, 'spec');
+
+				scope.$apply(function () {
+					scope.spec = false;
+				});
+			});
+		});
+
+		beforeEach(function () {
+			testValue = $store.get('specy');
+		});
+
+		it('should have $scope value', function () {
+			expect(testValue).toBe(false);
+		});
+	});
+
+	describe('when remove() field from localStorage', function () {
 		beforeEach(function () {
 			$store.remove('spec');
 		});
@@ -33,7 +61,7 @@ describe('angular-localStorage module', function () {
 			testValue = $store.get('spec');
 		});
 
-		it('should not contain value', function () {
+		it('should not contain field', function () {
 			expect(testValue).toBeNull();
 		});
 	});
