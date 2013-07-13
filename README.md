@@ -46,9 +46,9 @@ bower install angular-localStorage
 
 For live example please checkout - http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=preview
 
-# To do
+## To do
 
-Some unit tests will be highly appreciated. Please add issues for ideas or improvements! Thanks!
+Please add issues for ideas or improvements! Thanks!
 
 ---
 
