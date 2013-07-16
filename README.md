@@ -56,6 +56,10 @@ For live example please checkout - http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=p
 
 Please add an issue with ideas, improvements, or bugs! Thanks!
 
+## Travis CI
+
+Placeholder
+
 ---
 
 (c) 2013 MIT License
