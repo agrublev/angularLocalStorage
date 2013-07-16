@@ -1,7 +1,7 @@
 Angular-localStorage
 ====================
 
-The simpliest localStorage module you will ever use. Allowing you to set,get, and *bind* variables.
+The simpliest localStorage module you will ever use. Allowing you to set, get, and *bind* variables.
 
 ## Features:
 
@@ -40,6 +40,12 @@ This module is available as bower package, install it with this command:
 
 ```bash
 bower install angular-localStorage
+```
+
+or
+
+```bash
+bower install git://github.com/agrublev/Angular-localStorage.git
 ```
 
 ## Example

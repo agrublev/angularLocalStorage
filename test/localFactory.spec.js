@@ -1,5 +1,5 @@
 describe('angular-localStorage module', function () {
-	var $store, testValue,scope;
+	var $store, testValue, scope;
 
 	beforeEach(function () {
 		module('localStorage');
@@ -41,14 +41,20 @@ describe('angular-localStorage module', function () {
 			});
 		});
 
+		beforeEach(function () {
+			testValue = $store.get('spec');
+		});
+
 		it('should have $scope value', function () {
-			expect(scope.spec).toBe(false);
+			expect(testValue).toEqual(scope.spec);
 		});
 	});
 
 	describe('when unbind() variable that clears localStorage and the variable', function () {
+		var testLocalStorageValue, testLocalVariableValue;
+
 		beforeEach(function () {
-			$store.unbind(scope,'spec');
+			$store.unbind(scope, 'spec');
 		});
 
 		beforeEach(function () {
@@ -56,15 +62,17 @@ describe('angular-localStorage module', function () {
 			testLocalVariableValue = scope.spec;
 		});
 
-		it('should not contain field', function () {
+		it('should not contain field in storage', function () {
 			expect(testLocalStorageValue).toBeNull();
+		});
+
+		it('should not contain field in scope', function () {
 			expect(testLocalVariableValue).toBeNull();
 		});
 	});
 
 	describe('when remove() field from localStorage', function () {
 		beforeEach(function () {
-			$store.set('spec','lovely');
 			$store.remove('spec');
 		});
 
