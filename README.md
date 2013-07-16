@@ -58,7 +58,7 @@ Please add an issue with ideas, improvements, or bugs! Thanks!
 
 ## Travis CI
 
-Placeholder
+[![Build Status](https://travis-ci.org/agrublev/Angular-localStorage.png?branch=master)](https://travis-ci.org/agrublev/Angular-localStorage)
 
 ---
 
