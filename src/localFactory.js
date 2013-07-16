@@ -107,6 +107,17 @@ angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse
 				publicMethods.set(key, val);
 			}, true);
 			return publicMethods.get(key);
+		},
+		/**
+		 * Unbind - let's you unbind a variable from localStorage while removing the value from both
+		 * the localStorage and the local variable and sets it to null
+		 * @param $scope - the scope the variable was initially set in
+		 * @param key - the name of the variable you are unbinding
+		 */
+		unbind: function($scope,key) {
+			$parse(key).assign($scope, null);
+			$scope.$watch(key, function () { });
+			publicMethods.remove(key);
 		}
 	};
 	return publicMethods;
