@@ -1,4 +1,4 @@
-Angular-localStorage
+Angular-localStorage [![Build Status](https://travis-ci.org/agrublev/Angular-localStorage.png?branch=master)](https://travis-ci.org/agrublev/Angular-localStorage)
 ====================
 
 The simpliest localStorage module you will ever use. Allowing you to set, get, and *bind* variables.
@@ -55,10 +55,6 @@ For live example please checkout - http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=p
 ## Suggestions?
 
 Please add an issue with ideas, improvements, or bugs! Thanks!
-
-## Travis CI
-
-[![Build Status](https://travis-ci.org/agrublev/Angular-localStorage.png?branch=master)](https://travis-ci.org/agrublev/Angular-localStorage)
 
 ---
 
