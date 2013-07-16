@@ -1,0 +1,8 @@
+// ...snip...
+'devDependencies': {
+  'karma': '~0.8'
+},
+// ...snip...
+'scripts': {
+   'test': './node_modules/.bin/karma start --single-run --browsers PhantomJS'
+}
