@@ -18,11 +18,12 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
 3. Using the ``$store`` factory
   ```
   // binding it to a $scope.variable
-  $store.bind($scope,'varName','someDefaultValue');
+  $store.bind($scope,'varName','someDefaultValue','storename');
   // the params are ($scope, varName, defaultValue(optional))
   // $scope - pass a reference to whatever scope the variable resides in
   // varName - the variable name so for $scope.firstName enter 'firstName'
   // defaultValue - if you want to set a default value if there is no localStorage value so that the first time you initiate it the value is assigned
+  // storename - if you want to save it in the local storage using a keyname different from varName, set it here
 
   // will constantly be updating $scope.viewType
   // to change the variable both locally in your controller and in localStorage just do
