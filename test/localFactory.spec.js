@@ -105,7 +105,7 @@ describe('angular-localStorage module', function () {
 		});
 
 		beforeEach(function () {
-			testLocalStorageValue = $store.get('spec');
+			testLocalStorageValue = $store.get('specStore');
 			testLocalVariableValue = scope.spec;
 		});
 
