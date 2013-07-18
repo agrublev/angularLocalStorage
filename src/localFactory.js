@@ -95,33 +95,33 @@ angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse
 		 * @param $scope - the current scope you want the variable available in
 		 * @param key - the name of the variable you are binding
 		 * @param def - the default value (OPTIONAL)
-	     * @param storename - the name to use in local storage or cookie (OPTIONAL)
+	     * @param storeName - the name to use in local storage or cookie (OPTIONAL)
 		 * @returns {*} - returns whatever the stored value is
 		 */
-		bind: function ($scope, key, def, storename) {
+		bind: function ($scope, key, def, storeName) {
 			def = def || '';
-			storename = storename || key;
-			if (!publicMethods.get(storename)) {
-				publicMethods.set(storename, def);
+			storeName = storeName || key;
+			if (!publicMethods.get(storeName)) {
+				publicMethods.set(storeName, def);
 			}
-			$parse(key).assign($scope, publicMethods.get(storename));
+			$parse(key).assign($scope, publicMethods.get(storeName));
 			$scope.$watch(key, function (val) {
-				publicMethods.set(storename, val);
+				publicMethods.set(storeName, val);
 			}, true);
-			return publicMethods.get(storename);
+			return publicMethods.get(storeName);
 		},
 		/**
 		 * Unbind - let's you unbind a variable from localStorage while removing the value from both
 		 * the localStorage and the local variable and sets it to null
 		 * @param $scope - the scope the variable was initially set in
 		 * @param key - the name of the variable you are unbinding
-	     * @param storename - the name to use in local storage or cookie (OPTIONAL)
+	     * @param storeName - the name to use in local storage or cookie (OPTIONAL)
 		 */
-		unbind: function($scope,key,storename) {
-			storename = storename || key;
+		unbind: function($scope,key,storeName) {
+			storeName = storeName || key;
 			$parse(key).assign($scope, null);
 			$scope.$watch(key, function () { });
-			publicMethods.remove(storename);
+			publicMethods.remove(storeName);
 		}
 	};
 	return publicMethods;
