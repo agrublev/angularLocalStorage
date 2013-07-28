@@ -98,7 +98,8 @@ angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse
 		 * @returns {*} - returns whatever the stored value is
 		 */
 		bind: function ($scope, key, def) {
-			def = def || '';
+			// If no defined value for def we use empty string
+			def = (angular.isUndefined(def)) ? '' : def;
 			if (!publicMethods.get(key)) {
 				publicMethods.set(key, def);
 			}

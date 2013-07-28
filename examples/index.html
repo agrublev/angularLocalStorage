@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
+    <script src="../components/angular/angular.min.js"></script>
+    <script src="../components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="../src/localFactory.js"></script>
+    <script>
+        var eS = angular.module('exampleStore', ['localStorage']);
+
+        eS.controller('MainCtrl', ['$scope', '$store', function ( $scope, $store ) {
+            $store.bind($scope, 'test', 'Some Default Text');
+
+            $scope.clearTest = function () {
+                $store.remove('test');
+            };
+        }]);
+    </script>
+</head>
+<body>
+<div ng-app="exampleStore">
+    <div ng-controller="MainCtrl">
+        <p>{{test}}</p>
+        <label>Local Storage Bound:</label> <input type="text" ng-model="test">
+        <a ng-click="clearTest()">Clear Value from LC</a>
+
+        <p><i>Change the value in the textbox and refresh the page!</i></p>
+    </div>
+</div>
+</body>
+</html>
