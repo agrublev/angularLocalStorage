@@ -1,9 +1,9 @@
-angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse, $cookieStore) {
+angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse, $cookieStore, $window) {
 	/**
 	 * Global Vars
 	 */
-	var storage = (typeof window.localStorage === 'undefined') ? undefined : window.localStorage;
-	var supported = !(typeof storage === 'undefined' || typeof window.JSON === 'undefined');
+	var storage = (typeof $window.localStorage === 'undefined') ? undefined : $window.localStorage;
+	var supported = !(typeof storage === 'undefined' || typeof $window.JSON === 'undefined');
 
 	var privateMethods = {
 		/**
