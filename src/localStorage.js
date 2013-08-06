@@ -1,4 +1,4 @@
-angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse, $cookieStore, $window) {
+angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse, $cookieStore, $window, $log) {
 	/**
 	 * Global Vars
 	 */
@@ -47,7 +47,7 @@ angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse
 					$cookieStore.put(key, value);
 					return value;
 				} catch(e) {
-					console.log('Local Storage not supported, make sure you have angular-cookies enabled.');
+					$log.log('Local Storage not supported, make sure you have angular-cookies enabled.');
 				}
 			}
 			var saver = $window.JSON.stringify(value);
