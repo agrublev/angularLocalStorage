@@ -1,71 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <title>Angular localStorage  by agrublev</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Angular localStorage  by agrublev</title>
   </head>
-
   <body>
-    <div id="container">
-      <div class="inner">
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Angular localStorage </h1>
+        <p class="header">The simplest localStorage implementation you will ever use.</p>
 
-        <header>
-          <h1>Angular localStorage </h1>
-          <h2>The simplest localStorage implementation you will ever use.</h2>
-        </header>
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/agrublev/Angular-localStorage/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/agrublev/Angular-localStorage/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/agrublev/Angular-localStorage">View On GitHub</a></li>
+        </ul>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/agrublev/Angular-localStorage/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/agrublev/Angular-localStorage/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/agrublev/Angular-localStorage" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/agrublev">agrublev</a></p>
 
-        <hr>
 
-        <section id="main_content">
-          <h1>
-<a name="what-is-it" class="anchor" href="#what-is-it"><span class="octicon octicon-link"></span></a>What is it</h1>
+      </header>
+      <section>
+        <h1>
+<a name="angular-localstorage-" class="anchor" href="#angular-localstorage-"><span class="octicon octicon-link"></span></a>Angular-localStorage <a href="https://travis-ci.org/agrublev/Angular-localStorage"><img src="https://travis-ci.org/agrublev/Angular-localStorage.png?branch=master" alt="Build Status"></a>
+</h1>
 
-<p>Local Storage lets you store key value pair information on the browser of your visitor, it's very similar to a cookie. With this Angular Module you can enjoy all its benefits of localStorage plus some additional features that kick ass. Instead of having to constantly worry about setting the localStorage values when you change some variable in your Angular Application, the module automatically does this. It basically adds two way binding that you have come to expect from your application and the view, but it works by keeping the value stored locally with any angular value you choose. This can create much more robust applications.</p>
+<p>The simpliest localStorage module you will ever use. Allowing you to set, get, and <em>bind</em> variables.</p>
 
-<h1>
-<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features:</h1>
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features:</h2>
 
 <ul>
-<li>Two way bind your $scope variable value to a localStorage which will be updated whenever the model is updated, and vice versa.</li>
-<li>You can directly store Objects, Arrays, Floats, Booleans, and Strings. No need to convert your objects to strings and then reverse them.</li>
+<li>Two way bind your $scope variable value to a localStorage key/pair which will be updated whenever the model is updated.</li>
+<li>You can directly store Objects, Arrays, Floats, Booleans, and Strings. No need to convert your javascript values from strings.</li>
 <li>Fallback to Angular <code>$cookies</code> if localStorage is not supported (REMEMBER to add <code>angular-cookies.min.js</code> script to your project or remove <code>'ngCookies'</code> from a dependency);</li>
-</ul><h1>
-<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h1>
-
-<p>This module is also available as bower package, install it with such command:</p>
-
-<div class="highlight"><pre>bower install angular-localStorage
-</pre></div>
+</ul><h2>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h2>
 
 <ol>
-<li>Your application most likely has a line where you set it as a variable containing your module
-<code>var yourApp = angular.module('yourApp', [...]</code>
-</li>
 <li>Just add this module to your app as a dependency
 <code>var yourApp = angular.module('yourApp', [..., 'localStorage']</code>
 </li>
-<li>Now inside your controllers simply pass the $store like this
+<li>Now inside your controllers simply pass the $store factory like this
 <code>yourApp.controller('yourController', function( $scope, $store){</code>
 </li>
 <li>
 <p>Using the <code>$store</code> factory</p>
 
-<pre><code>// binding it to a $scope.variable - the params ($scope, varName, defaultValue(optional))
-$store.bind($scope,'viewType','cardView');
+<pre><code>// binding it to a $scope.variable
+$store.bind($scope,'varName','someDefaultValue');
+// the params are ($scope, varName, defaultValue(optional))
+// $scope - pass a reference to whatever scope the variable resides in
+// varName - the variable name so for $scope.firstName enter 'firstName'
+// defaultValue - if you want to set a default value if there is no localStorage value so that the first time you initiate it the value is assigned
+
 // will constantly be updating $scope.viewType
 // to change the variable both locally in your controller and in localStorage just do
 $scope.viewType = 'ANYTHING';
@@ -77,36 +74,47 @@ $store.set('key','value');
 $store.get('key');
 </code></pre>
 </li>
-</ol><h1>
-<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h1>
+</ol><h2>
+<a name="bower" class="anchor" href="#bower"><span class="octicon octicon-link"></span></a>Bower</h2>
 
-<p>For live example please checkout - <a href="http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=preview">http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=preview</a></p>
+<p>This module is available as bower package, install it with this command:</p>
 
-<h1>
-<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h1>
+<div class="highlight"><pre>bower install angular-localStorage
+</pre></div>
 
-<p>The repository is maintained by agrublev. Special thanks to:</p>
+<p>or</p>
+
+<div class="highlight"><pre>bower install git://github.com/agrublev/Angular-localStorage.git
+</pre></div>
+
+<h2>
+<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
+
+<p>The repository is maintained by Angel Grablev (agrublev). Special thanks to:</p>
 
 <ul>
 <li>ThomasWeiser </li>
 <li>Elexy </li>
 <li>voronianski</li>
 <li>DevinClark</li>
-</ul><h3>
-<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h3>
+</ul><h2>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h2>
 
-<ul>
-<li>Test coverage</li>
-<li>Real life examples of caching/storing ajax call responses and automatically updating the interface even "offline"</li>
-</ul>
-        </section>
+<p>For live example please checkout - <a href="http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=preview">http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=preview</a></p>
 
-        <footer>
-          Angular localStorage  is maintained by <a href="https://github.com/agrublev">agrublev</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+<h2>
+<a name="suggestions" class="anchor" href="#suggestions"><span class="octicon octicon-link"></span></a>Suggestions?</h2>
 
-                  <script type="text/javascript">
+<p>Please add an issue with ideas, improvements, or bugs! Thanks!</p>
+
+<hr><p>(c) 2013 MIT License</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		          <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -117,7 +125,5 @@ $store.get('key');
             } catch(err) {}
           </script>
 
-      </div>
-    </div>
   </body>
 </html>
