@@ -105,7 +105,9 @@ angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse
 			}
 			$parse(key).assign($scope, publicMethods.get(key));
 			$scope.$watch(key, function (val) {
-				publicMethods.set(key, val);
+				if (angular.isDefined(val)) {
+					publicMethods.set(key, val);
+				}
 			}, true);
 			return publicMethods.get(key);
 		},
