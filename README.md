@@ -39,7 +39,7 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
 This module is available as bower package, install it with this command:
 
 ```bash
-bower install angular-localStorage
+bower install Angular-localStorage
 ```
 
 or
