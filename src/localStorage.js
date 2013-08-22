@@ -1,4 +1,4 @@
-angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse, $cookieStore, $window, $log) {
+angular.module('localStorage', ['ngCookies']).factory('$store', ['$parse', '$cookieStore', '$window', '$log', function ($parse, $cookieStore, $window, $log) {
 	/**
 	 * Global Vars
 	 */
@@ -124,4 +124,4 @@ angular.module('localStorage', ['ngCookies']).factory('$store', function ($parse
 		}
 	};
 	return publicMethods;
-});
+}]);
