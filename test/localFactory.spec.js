@@ -9,20 +9,44 @@ describe('angular-localStorage module', function () {
 		});
 	});
 
-	describe('when use set() && get() methods', function () {
+        describe('when use set() && get() methods', function () {
 
-		beforeEach(function () {
-			$store.set('spec', 'some test string');
-		});
+                it('should store primitives in localStorage', function () {
+                        $store.set('spec', 'some test string');
+                        expect($store.get('spec')).toEqual('some test string');
 
-		beforeEach(function () {
-			testValue = $store.get('spec');
-		});
+                        $store.set('spec', 1);
+                        expect($store.get('spec')).toEqual(1);
 
-		it('should store value in localStorage', function () {
-			expect(testValue).toBe('some test string');
-		});
-	});
+                        $store.set('spec', 1.5);
+                        expect($store.get('spec')).toEqual(1.5);
+
+                        $store.set('spec', true);
+                        expect($store.get('spec')).toBeTruthy();
+
+                        $store.set('spec', false);
+                        expect($store.get('spec')).toBeFalsy();
+
+                        $store.set('spec', null);
+                        expect($store.get('spec')).toBeNull();
+                });
+
+                it('should store object in localStorage', function () {
+                        $store.set('spec', {});
+                        expect($store.get('spec')).toEqual({});
+
+                        $store.set('spec', {"value": 1});
+                        expect($store.get('spec')).toEqual({"value": 1});
+                });
+
+                it('should store array in localStorage', function () {
+                        $store.set('spec', []);
+                        expect($store.get('spec')).toEqual([]);
+
+                        $store.set('spec', [1,2,3]);
+                        expect($store.get('spec')).toEqual([1,2,3]);
+                });
+        });
 
 	describe('when bind() $scope field to localStorage', function () {
 		beforeEach(function () {

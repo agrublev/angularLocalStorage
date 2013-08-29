@@ -50,7 +50,8 @@ angular.module('localStorage', ['ngCookies']).factory('$store', ['$parse', '$coo
 					$log.log('Local Storage not supported, make sure you have angular-cookies enabled.');
 				}
 			}
-			var saver = $window.JSON.stringify(value);
+			var valueType = Object.prototype.toString.call(value).slice(8, -1);
+			var saver = (valueType === 'String' || valueType === 'Number' || valueType === 'Boolean' || valueType === undefined || valueType === null) ? value : $window.JSON.stringify(value);
 			storage.setItem(key, saver);
 			return privateMethods.parseValue(saver);
 		},
