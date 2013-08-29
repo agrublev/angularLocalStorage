@@ -48,6 +48,15 @@ describe('angular-localStorage module', function () {
 		it('should have $scope value', function () {
 			expect(testValue).toEqual(scope.spec);
 		});
+
+                it('should not store undefined value', function () {
+                        scope.$apply(function () {
+                            scope.spec = undefined;
+                        });
+
+                        expect(testValue).toEqual(false);
+                        expect(scope.spec).toBeUndefined();
+                });
 	});
 
 	describe('when unbind() variable that clears localStorage and the variable', function () {
