@@ -121,6 +121,12 @@ angular.module('localStorage', ['ngCookies']).factory('$store', ['$parse', '$coo
 			$parse(key).assign($scope, null);
 			$scope.$watch(key, function () { });
 			publicMethods.remove(key);
+		},
+		/**
+		 * Clear All - let's you clear out ALL localStorage variables, use this carefully!
+		 */
+		clearAll: function() {
+			storage.clear();
 		}
 	};
 	return publicMethods;

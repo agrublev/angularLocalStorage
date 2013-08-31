@@ -93,4 +93,20 @@ describe('angular-localStorage module', function () {
 			expect(testValue).toBeNull();
 		});
 	});
+
+	describe('when use clearAll() method all should be gone', function () {
+
+		beforeEach(function () {
+			$store.set('spec', 'some test string');
+		});
+
+		beforeEach(function () {
+			$store.clearAll();
+			testValue = $store.get('spec');
+		});
+
+		it('should return null for value in localStorage', function () {
+			expect(testValue).toBeNull();
+		});
+	});
 });

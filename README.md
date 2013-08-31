@@ -33,6 +33,9 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
   $store.set('key','value');
   // getting that value
   $store.get('key');
+
+  // clear all localStorage values
+  $store.clearAll();
   ```
 
 ## Bower
