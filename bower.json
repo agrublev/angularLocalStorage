@@ -1,5 +1,5 @@
 {
-  "name": "angular-localStorage",
+  "name": "Angular-localStorage",
   "version": "0.1.5",
   "main": "src/localStorage.js",
   "ignore": [
