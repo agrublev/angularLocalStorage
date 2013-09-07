@@ -1,7 +1,8 @@
 {
 	"name":"Angular-localStorage",
 	"devDependencies": {
-		"karma": "~0.8"
+		"karma": "~0.10"
+		"karma-jasmine": "~0.1"
 	},
 	"scripts": {
 		"test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
