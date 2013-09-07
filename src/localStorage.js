@@ -92,35 +92,61 @@ angular.module('localStorage', ['ngCookies']).factory('$store', ['$parse', '$coo
 
 		/**
 		 * Bind - let's you directly bind a localStorage value to a $scope variable
-		 * @param $scope - the current scope you want the variable available in
-		 * @param key - the name of the variable you are binding
-		 * @param def - the default value (OPTIONAL)
+		 * @param {Angular $scope} $scope - the current scope you want the variable available in
+		 * @param {String} key - the name of the variable you are binding
+		 * @param {Object} opts - (optional) custom options like default value or unique store name
+         * Here are the available options you can set:
+         * * defaultValue: the default value
+         * * storeName: add a custom store key value instead of using the scope variable name
 		 * @returns {*} - returns whatever the stored value is
 		 */
-		bind: function ($scope, key, def) {
-			// If no defined value for def we use empty string
-			def = (angular.isUndefined(def)) ? '' : def;
-			if (!publicMethods.get(key)) {
-				publicMethods.set(key, def);
+		bind: function ($scope, key, opts) {
+            var defaultOpts = {
+                defaultValue: '',
+                storeName: ''
+            };
+            // Backwards compatibility with old defaultValue string
+            if (angular.isString(opts)) {
+                opts = angular.extend({},defaultOpts,{defaultValue:opts});
+            } else {
+                // If no defined options we use defaults otherwise extend defaults
+                opts = (angular.isUndefined(opts)) ? defaultOpts : angular.extend(defaultOpts,opts);
+            }
+
+			// Set the storeName key for the localStorage entry
+			// use user defined in specified
+			var storeName = opts.storeName || key;
+
+			// If a value doesn't already exist store it as is
+			if (!publicMethods.get(storeName)) {
+				publicMethods.set(storeName, opts.defaultValue);
 			}
-			$parse(key).assign($scope, publicMethods.get(key));
+
+			// If it does exist assign it to the $scope value
+			$parse(key).assign($scope, publicMethods.get(storeName));
+
+			// Register a listener for changes on the $scope value
+			// to update the localStorage value
 			$scope.$watch(key, function (val) {
 				if (angular.isDefined(val)) {
-					publicMethods.set(key, val);
+					publicMethods.set(storeName, val);
 				}
 			}, true);
-			return publicMethods.get(key);
+
+			return publicMethods.get(storeName);
 		},
 		/**
 		 * Unbind - let's you unbind a variable from localStorage while removing the value from both
 		 * the localStorage and the local variable and sets it to null
 		 * @param $scope - the scope the variable was initially set in
 		 * @param key - the name of the variable you are unbinding
+		 * @param storeName - (optional) if you used a custom storeName you will have to specify it here as well
 		 */
-		unbind: function($scope,key) {
+		unbind: function($scope,key,storeName) {
+			storeName = storeName || key;
 			$parse(key).assign($scope, null);
 			$scope.$watch(key, function () { });
-			publicMethods.remove(key);
+			publicMethods.remove(storeName);
 		},
 		/**
 		 * Clear All - let's you clear out ALL localStorage variables, use this carefully!

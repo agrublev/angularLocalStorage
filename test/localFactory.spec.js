@@ -49,15 +49,39 @@ describe('angular-localStorage module', function () {
 			expect(testValue).toEqual(scope.spec);
 		});
 
-                it('should not store undefined value', function () {
-                        scope.$apply(function () {
-                            scope.spec = undefined;
-                        });
+		it('should not store undefined value', function () {
+				scope.$apply(function () {
+					scope.spec = undefined;
+				});
 
-                        expect(testValue).toEqual(false);
-                        expect(scope.spec).toBeUndefined();
-                });
+				expect(testValue).toEqual(false);
+				expect(scope.spec).toBeUndefined();
+		});
+
+		it('should store default value when passed as string', function() {
+			scope.$apply(function(){
+				$store.bind(scope,'defaultedSpec','someDefault');
+			});
+			expect(scope.defaultedSpec).toEqual('someDefault');
+		});
+
+		it('should store default value when passed as options object', function() {
+			scope.$apply(function(){
+				$store.bind(scope,'defaultedSpecObj',{defaultValue: 'someNewDefault'});
+			});
+			expect(scope.defaultedSpecObj).toEqual('someNewDefault');
+		});
+
+		it('using a custom storeName to bind variable', function() {
+			scope.$apply(function(){
+				$store.bind(scope,'customStored',{defaultValue: 'randomValue123' ,storeName: 'myCustomStore'});
+				scope.directFromLocal = $store.get('myCustomStore');
+			});
+			expect(scope.customStored).toEqual('randomValue123');
+			expect(scope.directFromLocal).toEqual('randomValue123');
+		});
 	});
+
 
 	describe('when unbind() variable that clears localStorage and the variable', function () {
 		var testLocalStorageValue, testLocalVariableValue;
