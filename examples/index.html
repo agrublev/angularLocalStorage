@@ -17,9 +17,9 @@
 
     <script src="../components/angular/angular.min.js"></script>
     <script src="../components/angular-cookies/angular-cookies.min.js"></script>
-    <script src="../src/ngStorage.js"></script>
+    <script src="../src/angularLocalStorage.js"></script>
     <script>
-        var eS = angular.module('exampleStore', ['ngStorage']);
+        var eS = angular.module('exampleStore', ['angularLocalStorage']);
 
         eS.controller('MainCtrl', ['$scope', 'storage', function ( $scope, storage ) {
             storage.bind($scope, 'test', 'Some Default Text');
@@ -52,7 +52,7 @@
             </div>
             <div class="large-8 columns">
                 <pre>
-var eS = angular.module('exampleStore', ['ngStorage']);
+var eS = angular.module('exampleStore', ['angularLocalStorage']);
 
 eS.controller('MainCtrl', ['$scope', 'storage', function ( $scope, storage ) {
     storage.bind($scope, 'test', 'Some Default Text');

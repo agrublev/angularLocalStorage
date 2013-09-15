@@ -1,8 +1,8 @@
-describe('ngStorage module', function () {
+describe('angularLocalStorage module', function () {
 	var storage, testValue, scope;
 
 	beforeEach(function () {
-		module('ngStorage');
+		module('angularLocalStorage');
 
 		inject(function ($injector) {
 			storage = $injector.get('storage');
