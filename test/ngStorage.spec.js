@@ -1,22 +1,22 @@
-describe('angular-localStorage module', function () {
-	var $store, testValue, scope;
+describe('ngStorage module', function () {
+	var storage, testValue, scope;
 
 	beforeEach(function () {
-		module('localStorage');
+		module('ngStorage');
 
 		inject(function ($injector) {
-			$store = $injector.get('$store');
+			storage = $injector.get('storage');
 		});
 	});
 
 	describe('when use set() && get() methods', function () {
 
 		beforeEach(function () {
-			$store.set('spec', 'some test string');
+			storage.set('spec', 'some test string');
 		});
 
 		beforeEach(function () {
-			testValue = $store.get('spec');
+			testValue = storage.get('spec');
 		});
 
 		it('should store value in localStorage', function () {
@@ -33,7 +33,7 @@ describe('angular-localStorage module', function () {
 					scope.spec = true;
 				});
 
-				$store.bind(scope, 'spec');
+				storage.bind(scope, 'spec');
 
 				scope.$apply(function () {
 					scope.spec = false;
@@ -42,7 +42,7 @@ describe('angular-localStorage module', function () {
 		});
 
 		beforeEach(function () {
-			testValue = $store.get('spec');
+			testValue = storage.get('spec');
 		});
 
 		it('should have $scope value', function () {
@@ -60,22 +60,22 @@ describe('angular-localStorage module', function () {
 
 		it('should store default value when passed as string', function() {
 			scope.$apply(function(){
-				$store.bind(scope,'defaultedSpec','someDefault');
+				storage.bind(scope,'defaultedSpec','someDefault');
 			});
 			expect(scope.defaultedSpec).toEqual('someDefault');
 		});
 
 		it('should store default value when passed as options object', function() {
 			scope.$apply(function(){
-				$store.bind(scope,'defaultedSpecObj',{defaultValue: 'someNewDefault'});
+				storage.bind(scope,'defaultedSpecObj',{defaultValue: 'someNewDefault'});
 			});
 			expect(scope.defaultedSpecObj).toEqual('someNewDefault');
 		});
 
 		it('using a custom storeName to bind variable', function() {
 			scope.$apply(function(){
-				$store.bind(scope,'customStored',{defaultValue: 'randomValue123' ,storeName: 'myCustomStore'});
-				scope.directFromLocal = $store.get('myCustomStore');
+				storage.bind(scope,'customStored',{defaultValue: 'randomValue123' ,storeName: 'myCustomStore'});
+				scope.directFromLocal = storage.get('myCustomStore');
 			});
 			expect(scope.customStored).toEqual('randomValue123');
 			expect(scope.directFromLocal).toEqual('randomValue123');
@@ -87,11 +87,11 @@ describe('angular-localStorage module', function () {
 		var testLocalStorageValue, testLocalVariableValue;
 
 		beforeEach(function () {
-			$store.unbind(scope, 'spec');
+			storage.unbind(scope, 'spec');
 		});
 
 		beforeEach(function () {
-			testLocalStorageValue = $store.get('spec');
+			testLocalStorageValue = storage.get('spec');
 			testLocalVariableValue = scope.spec;
 		});
 
@@ -106,11 +106,11 @@ describe('angular-localStorage module', function () {
 
 	describe('when remove() field from localStorage', function () {
 		beforeEach(function () {
-			$store.remove('spec');
+			storage.remove('spec');
 		});
 
 		beforeEach(function () {
-			testValue = $store.get('spec');
+			testValue = storage.get('spec');
 		});
 
 		it('should not contain field', function () {
@@ -121,12 +121,12 @@ describe('angular-localStorage module', function () {
 	describe('when use clearAll() method all should be gone', function () {
 
 		beforeEach(function () {
-			$store.set('spec', 'some test string');
+			storage.set('spec', 'some test string');
 		});
 
 		beforeEach(function () {
-			$store.clearAll();
-			testValue = $store.get('spec');
+			storage.clearAll();
+			testValue = storage.get('spec');
 		});
 
 		it('should return null for value in localStorage', function () {

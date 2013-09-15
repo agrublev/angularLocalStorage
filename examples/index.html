@@ -17,15 +17,15 @@
 
     <script src="../components/angular/angular.min.js"></script>
     <script src="../components/angular-cookies/angular-cookies.min.js"></script>
-    <script src="../src/localStorage.js"></script>
+    <script src="../src/ngStorage.js"></script>
     <script>
-        var eS = angular.module('exampleStore', ['localStorage']);
+        var eS = angular.module('exampleStore', ['ngStorage']);
 
-        eS.controller('MainCtrl', ['$scope', '$store', function ( $scope, $store ) {
-            $store.bind($scope, 'test', 'Some Default Text');
+        eS.controller('MainCtrl', ['$scope', 'storage', function ( $scope, storage ) {
+            storage.bind($scope, 'test', 'Some Default Text');
 
             $scope.clearTest = function () {
-                $store.remove('test');
+                storage.remove('test');
             };
         }]);
     </script>
@@ -52,13 +52,13 @@
             </div>
             <div class="large-8 columns">
                 <pre>
-var eS = angular.module('exampleStore', ['localStorage']);
+var eS = angular.module('exampleStore', ['ngStorage']);
 
-eS.controller('MainCtrl', ['$scope', '$store', function ( $scope, $store ) {
-    $store.bind($scope, 'test', 'Some Default Text');
+eS.controller('MainCtrl', ['$scope', 'storage', function ( $scope, storage ) {
+    storage.bind($scope, 'test', 'Some Default Text');
 
     $scope.clearTest = function () {
-        $store.remove('test');
+        storage.remove('test');
     };
 }]);
                 </pre>

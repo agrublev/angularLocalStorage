@@ -1,5 +1,5 @@
 {
-	"name":"Angular-localStorage",
+	"name":"ngStorage",
 	"devDependencies": {
 		"karma": "~0.10",
 		"karma-jasmine": "~0.1"

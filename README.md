@@ -1,4 +1,4 @@
-Angular-localStorage [![Build Status](https://travis-ci.org/agrublev/Angular-localStorage.png?branch=master)](https://travis-ci.org/agrublev/Angular-localStorage)
+ngStorage [![Build Status](https://travis-ci.org/agrublev/ngStorage.png?branch=master)](https://travis-ci.org/agrublev/ngStorage)
 ====================
 
 The simpliest localStorage module you will ever use. Allowing you to set, get, and *bind* variables.
@@ -12,15 +12,15 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
 ## How to use
 
 1. Just add this module to your app as a dependency
-``var yourApp = angular.module('yourApp', [..., 'localStorage']``
-2. Now inside your controllers simply pass the $store factory like this
-``yourApp.controller('yourController', function( $scope, $store){``
-3. Using the ``$store`` factory
+``var yourApp = angular.module('yourApp', [..., 'ngStorage']``
+2. Now inside your controllers simply pass the storage factory like this
+``yourApp.controller('yourController', function( $scope, storage){``
+3. Using the ``storage`` factory
   ```
   // binding it to a $scope.variable (minimal)
-  $store.bind($scope,'varName');
+  storage.bind($scope,'varName');
   // binding full
-  $store.bind($scope,'varName',{defaultValue: 'randomValue123' ,storeName: 'customStoreKey'});
+  storage.bind($scope,'varName',{defaultValue: 'randomValue123' ,storeName: 'customStoreKey'});
   // the params are ($scope, varName, opts(optional))
   // $scope - pass a reference to whatever scope the variable resides in
   // varName - the variable name so for $scope.firstName enter 'firstName'
@@ -35,25 +35,25 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
   // that's it, it will be updated in localStorage
 
   // just storing something in localStorage with cookie backup for unsupported browsers
-  $store.set('key','value');
+  storage.set('key','value');
   // getting that value
-  $store.get('key');
+  storage.get('key');
 
   // clear all localStorage values
-  $store.clearAll();
+  storage.clearAll();
   ```
 
 ## Bower
 This module is available as bower package, install it with this command:
 
 ```bash
-bower install Angular-localStorage
+bower install ngStorage
 ```
 
 or
 
 ```bash
-bower install git://github.com/agrublev/Angular-localStorage.git
+bower install git://github.com/agrublev/ngStorage.git
 ```
 
 ## Example
