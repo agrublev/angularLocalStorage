@@ -2,6 +2,7 @@ angularLocalStorage [![Build Status](https://travis-ci.org/capaj/angularLocalSto
 ====================
 
 The simplest localStorage module you will ever use. Allowing you to set, get, and *bind* variables.
+Version 0.1.8.
 
 ## Features:
 
