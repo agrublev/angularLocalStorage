@@ -2,13 +2,13 @@ angularLocalStorage [![Build Status](https://travis-ci.org/capaj/angularLocalSto
 ====================
 
 The simplest localStorage module you will ever use. Allowing you to set, get, and *bind* variables.
-Version 0.1.8.
 
 ## Features:
 
 * Two way bind your $scope variable value to a localStorage key/pair which will be updated whenever the model is updated.
 * You can directly store Objects, Arrays, Floats, Booleans, and Strings. No need to convert your javascript values from strings.
 * THIS FORK DOESNT support fallback to cookies, if you want that, go grab https://github.com/agrublev/angularLocalStorage
+* automatic dateStamp creation for stored values(can be turned off assigning: storage.dateStamps = false;)
 
 ## How to use
 
@@ -39,6 +39,8 @@ Version 0.1.8.
   storage.set('key','value');
   // getting that value
   storage.get('key');
+  // getting stamp for that value
+  storage.getDateStamp('key');
 
   // clear all localStorage values
   storage.clearAll();
@@ -48,12 +50,13 @@ Version 0.1.8.
 This module is installed with this command:
 
 ```bash
+bower install angularLocalStorage-nc
+```
+or
+```bash
 bower install git://github.com/capaj/angularLocalStorage.git
 ```
 
-## Example
-
-For live example please checkout - http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=preview
 
 ---
 

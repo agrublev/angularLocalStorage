@@ -84,12 +84,11 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
 
         /**
          * getDateStamp - let's you get the datestamp stored with your value
-         * @param key - the string that you set as accessor for the pair
-         * @returns {*} - Object,String,Float,Boolean depending on what you stored
+         * @param key - the string that you set as accessor for your value
+         * @returns {Date} of when the value of key was stored
          */
         getDateStamp: function (key) {
-            var item = storage.getItem(pub.stampKeyBuilder(key));
-            return privateMethods.parseValue(item);
+            return pub.get(pub.stampKeyBuilder(key));
         },
 
         /**
