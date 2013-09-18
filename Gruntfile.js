@@ -8,12 +8,12 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'dist/<%= pkg.name %>.min.js': 'src/<%= pkg.name %>.js'
+                    'dist/angularLocalStorage.min.js': 'src/angularLocalStorage.js'
                 }
             }
         },
         watch: {
-            files: 'src/<%= pkg.name %>.js',
+            files: 'src/angularLocalStorage.js',
             tasks: 'test'
         }
     });

@@ -1,6 +1,6 @@
 {
     "name": "angularLocalStorage-nc",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "devDependencies": {
     "karma": "~0.10",
     "grunt": "~0.4.1",

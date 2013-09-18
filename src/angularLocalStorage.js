@@ -37,7 +37,13 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
         }
     };
 
-    var publicMethods = {
+    var pub = {
+        /**
+         * indicates whether we should store dateStamps or not
+         */
+        dateStamps: true,
+        dateStampsSuffix: '_dateStamp',
+        dateStampsPrefix: '',
         /**
          * Set - let's you set a new localStorage key pair set
          * @param key - a string that will be used as the accessor for the pair
@@ -45,8 +51,17 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
          * @returns {*} - will return whatever it is you've stored in the local storage
          */
         set: function (key, value) {
-            var saver = $window.JSON.stringify(value);
-            storage.setItem(key, saver);
+            var stri = $window.JSON.stringify;
+            var saver = stri(value);
+            try {
+                storage.setItem(key, saver);
+                if (pub.dateStamps === true) {
+                    storage.setItem(pub.dateStampsPrefix + key + pub.dateStampsSuffix, stri(new Date()))
+                }
+            } catch(e) {
+                console.error("localStorage LIMIT REACHED: (" + e + ")");
+                throw e;
+            }
             return privateMethods.parseValue(saver);
         },
 
@@ -98,22 +113,22 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
             var storeName = opts.storeName || key;
 
             // If a value doesn't already exist store it as is
-            if (!publicMethods.get(storeName)) {
-                publicMethods.set(storeName, opts.defaultValue);
+            if (!pub.get(storeName)) {
+                pub.set(storeName, opts.defaultValue);
             }
 
             // If it does exist assign it to the $scope value
-            $parse(key).assign($scope, publicMethods.get(storeName));
+            $parse(key).assign($scope, pub.get(storeName));
 
             // Register a listener for changes on the $scope value
             // to update the localStorage value
             $scope.$watch(key, function (val) {
                 if (angular.isDefined(val)) {
-                    publicMethods.set(storeName, val);
+                    pub.set(storeName, val);
                 }
             }, true);
 
-            return publicMethods.get(storeName);
+            return pub.get(storeName);
         },
         /**
          * Unbind - let's you unbind a variable from localStorage while removing the value from both
@@ -126,7 +141,7 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
             storeName = storeName || key;
             $parse(key).assign($scope, null);
             $scope.$watch(key, function () { });
-            publicMethods.remove(storeName);
+            pub.remove(storeName);
         },
         /**
          * Clear All - let's you clear out ALL localStorage variables, use this carefully!
@@ -135,5 +150,5 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
             storage.clear();
         }
     };
-    return publicMethods;
+    return pub;
 }]);
