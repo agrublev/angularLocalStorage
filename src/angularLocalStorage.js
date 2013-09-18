@@ -42,8 +42,15 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
          * indicates whether we should store dateStamps or not
          */
         dateStamps: true,
+        /**
+         * builds a key for every timestamp
+         * @param valueKey
+         * @returns {string}
+         */
+        stampKeyBuilder: function (valueKey) {
+            return valueKey + pub.dateStampsSuffix;
+        },
         dateStampsSuffix: '_dateStamp',
-        dateStampsPrefix: '',
         /**
          * Set - let's you set a new localStorage key pair set
          * @param key - a string that will be used as the accessor for the pair
@@ -56,7 +63,7 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
             try {
                 storage.setItem(key, saver);
                 if (pub.dateStamps === true) {
-                    storage.setItem(pub.dateStampsPrefix + key + pub.dateStampsSuffix, stri(new Date()))
+                    storage.setItem(pub.stampKeyBuilder(key), stri(new Date()))
                 }
             } catch(e) {
                 console.error("localStorage LIMIT REACHED: (" + e + ")");
@@ -72,6 +79,16 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
          */
         get: function (key) {
             var item = storage.getItem(key);
+            return privateMethods.parseValue(item);
+        },
+
+        /**
+         * getDateStamp - let's you get the datestamp stored with your value
+         * @param key - the string that you set as accessor for the pair
+         * @returns {*} - Object,String,Float,Boolean depending on what you stored
+         */
+        getDateStamp: function (key) {
+            var item = storage.getItem(pub.stampKeyBuilder(key));
             return privateMethods.parseValue(item);
         },
 
