@@ -1,4 +1,4 @@
-angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window', '$log', function ($parse, $window, $log) {
+angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window', '$log', function storage($parse, $window, $log) {
     /**
      * Global Vars
      */
