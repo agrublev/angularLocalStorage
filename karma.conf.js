@@ -9,7 +9,7 @@ module.exports = function ( config ) {
 
 		// list of files / patterns to load in the browser
 		files : [
-			'components/angular/angular.js', 'components/angular-cookies/angular-cookies.js', 'components/angular-mocks/angular-mocks.js', 'src/*.js', 'test/*.spec.js'
+			'components/angular/angular.js', 'components/angular-mocks/angular-mocks.js', 'src/*.js', 'test/*.spec.js'
 		],
 
 		// list of files to exclude
