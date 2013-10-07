@@ -4,10 +4,7 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
      */
     var storage = (typeof $window.localStorage === 'undefined') ? undefined : $window.localStorage;
     var supported = !(typeof storage === 'undefined' || typeof $window.JSON === 'undefined');
-    if (!supported) {
-        $log.error('Local Storage not supported, this application needs localStorage in order to run');
-        return;
-    }
+
     var privateMethods = {
         /**
          * Pass any type of a string from the localStorage to be parsed so it returns a usable version (like an Object)
@@ -66,7 +63,7 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
                     storage.setItem(pub.stampKeyBuilder(key), stri(new Date()))
                 }
             } catch(e) {
-                console.error("localStorage LIMIT REACHED: (" + e + ")");
+                $log.error("localStorage LIMIT REACHED: (" + e + ")");
                 throw e;
             }
             return privateMethods.parseValue(saver);
@@ -166,5 +163,14 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
             storage.clear();
         }
     };
+	if (!supported) {
+		$log.error('Local Storage not supported, this application needs localStorage in order to run');
+		var noop = function () {};
+		var dummy = {};
+		for(var prop in pub){
+			dummy[prop] = noop;
+		}
+		return dummy;
+	}
     return pub;
 }]);
