@@ -3,7 +3,7 @@ angular.module('angularLocalStorage', ['ngCookies']).factory('storage', ['$parse
 	 * Global Vars
 	 */
 	var storage = (typeof $window.localStorage === 'undefined') ? undefined : $window.localStorage;
-	var supported = !(typeof storage === 'undefined' || typeof $window.JSON === 'undefined');
+	var supported = !(typeof storage === 'undefined');
 
 	var privateMethods = {
 		/**
@@ -14,7 +14,7 @@ angular.module('angularLocalStorage', ['ngCookies']).factory('storage', ['$parse
 		parseValue: function (res) {
 			var val;
 			try {
-				val = $window.JSON.parse(res);
+				val = angular.fromJson(res);
 				if (typeof val === 'undefined') {
 					val = res;
 				}
@@ -50,7 +50,7 @@ angular.module('angularLocalStorage', ['ngCookies']).factory('storage', ['$parse
 					$log.log('Local Storage not supported, make sure you have angular-cookies enabled.');
 				}
 			}
-			var saver = $window.JSON.stringify(value);
+			var saver = angular.toJson(value);
 			storage.setItem(key, saver);
 			return privateMethods.parseValue(saver);
 		},
