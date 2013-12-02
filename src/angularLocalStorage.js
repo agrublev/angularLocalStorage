@@ -3,7 +3,7 @@ angular.module('angularLocalStorage', ['ngCookies']).factory('storage', ['$parse
 	 * Global Vars
 	 */
 	var storage = (typeof $window.localStorage === 'undefined') ? undefined : $window.localStorage;
-	var supported = !(typeof storage === 'undefined');
+	var supported = typeof storage !== 'undefined';
 
 	var privateMethods = {
 		/**
