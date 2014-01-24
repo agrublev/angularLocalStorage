@@ -16,7 +16,7 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
 2. Now inside your controllers simply pass the storage factory like this
 ``yourApp.controller('yourController', function( $scope, storage){``
 3. Using the ``storage`` factory
-  ```
+  ```JAVASCRIPT
   // binding it to a $scope.variable (minimal)
   storage.bind($scope,'varName');
   // binding full
