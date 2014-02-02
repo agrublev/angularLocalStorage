@@ -93,5 +93,3 @@
 		};
 		return publicMethods;
 	}]);  
-
-})(window, window.angular);
