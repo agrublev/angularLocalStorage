@@ -39,25 +39,28 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
 4. About data-binding 
   Compare with original version , I had modified all the code about data-binding , for I think it difficult and     confused. 
   ```JAVASCRIPT
-  storage.bind($scope,'zero','zero','normal');
+	storage.bind($scope,'zero','zero','normal');
+	storage.unbind($scope,'zero','zero','normal');
   ```
   Below is example snippt for data-binding if you don't use bind method:
   ```JAVASCRIPT
       $scope.storageListener = function(){
           return storage.get('zero');
       }
-      $scope.$watch($scope.storageListener,function(newVal,oldVal){
+      var tmp=$scope.$watch($scope.storageListener,function(newVal,oldVal){
       	  $scope.zero = newVal;
-      },true)  
+      },true) 
+      tmp(); 
   ```
   The snippt purpose is to modify $scope.zero when localstorage.zero has changed,direction is from localstorage to
   model
 
   ```JAVASCRIPT
-  	  $scope.zero = 'I Love You!';
-      $scope.$watch('zero',function(newVal,oldVal){
+	  $scope.zero = 'I Love You!';
+      var tmp=$scope.$watch('zero',function(newVal,oldVal){
       	storage.update('zero',$scope.zero);
-      },true)  
+      },true) 
+      tmp(); 
   ```
   The snippt purpose is to modify  localstorage.zero when $scope.zero has changed,direction is from model to 
   localstorage
