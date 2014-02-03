@@ -37,9 +37,9 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
   storage.bind($scope,modelKey,storageKey,dirction);
   ```
 4. About data-binding 
-  Compare with original version , I had modified all the code about data-binding , for I think it difficult and     confused to achieve. 
+  Compare with original version , I had modified all the code about data-binding , for I think it difficult and     confused. 
   ```JAVASCRIPT
-  storage.bind($scope,zero,zero,normal);
+  storage.bind($scope,"zero","zero","normal");
   ```
   Below is example snippt for data-binding if you don't use bind method:
   ```JAVASCRIPT
@@ -62,8 +62,8 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
   The snippt purpose is to modify  localstorage.zero when $scope.zero has changed,direction is from model to 
   localstorage
   
-Please add an issue with ideas, improvements, or bugs! Thanks!
-You can send me email ``hjj491229492@hotmail.com``
+  Please add an issue with ideas, improvements, or bugs! Thanks!
+  You can send me email ``hjj491229492@hotmail.com``
 
 ---
 
