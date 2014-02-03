@@ -6,7 +6,7 @@
 (function (window, angular, undefined) {
 	'use strict';
 
-	angular.module('angularLocalStorage')
+	angular.module('administratorApp')
 	  .factory('storage', ['$parse','$window', '$log',
       function ($parse, $window, $log) {
 		/**
@@ -75,7 +75,7 @@
 			/**
 			 * Clear All - let's you clear out ALL localStorage variables, use this carefully!
 			 */
- 			clearAll: function() {
+ 			clearAll : function() {
 				storage.clear();
 			},
 
@@ -89,6 +89,53 @@
 				}
 				publicMethods.set(key,value);
 			},
+
+			/** Bind - Make a data-binding in single way or both way
+			 * @param $scope - this param is to inject $scope service in my own opinion
+			 * @param modelKey - angular expression that will be used to get value from the $scope 
+			 * @param storageKey - the name of the localStorage item
+			 * @param direction - data-binding dirction , from model to localstorage or from localstorage to 
+			                      model or both way 
+
+			 */
+			bind: function($scope,modelKey,storageKey,direction){
+                
+                switch (direction) {
+                   case 'forward' :
+                     forward();
+                     break;
+                   case 'reverse' :
+                     reverse();
+                     break;          
+                   default :
+                     forward();
+                     reverse();
+                     break;                                
+                }
+
+				function reverse(){
+
+					$scope.$watch(
+						function(){return publicMethods.get(storageKey)},
+	                    function(newVal,oldVal){
+	                       $parse(modelKey).assign($scope,newVal);
+	                    },
+	                    true
+					)					
+				}
+
+				function forward(){
+
+					$scope.$watch(
+						function(){return $parse(modelKey)($scope);},
+	                    function(newVal,oldVal){
+	                    	publicMethods.set(storageKey,newVal);
+	                    },
+	                    true
+					)					
+				}				
+ 
+			}
 			
 		};
 		return publicMethods;
