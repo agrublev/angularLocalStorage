@@ -1,19 +1,13 @@
-/*
- * Angular.js localStorage module
- * https://github.com/agrublev/angularLocalStorage
- */
+'use strict';
 
-(function (window, angular, undefined) {
-	'use strict';
-
-	angular.module('administratorApp')
-	  .factory('storage', ['$parse','$window', '$log',
+angular.module('angularLocalStorage')
+  
+  .factory('storage', ['$parse','$window', '$log',
       function ($parse, $window, $log) {
 		/**
 		 * Global Vars
 		 */
 		var storage = (typeof $window.localStorage === 'undefined') ? undefined : $window.localStorage;
-
 		var privateMethods = {
 			/**
 			 * Pass any type of a string from the localStorage to be parsed
@@ -75,7 +69,7 @@
 			/**
 			 * Clear All - let's you clear out ALL localStorage variables, use this carefully!
 			 */
- 			clearAll : function() {
+ 			clearAll: function() {
 				storage.clear();
 			},
 
@@ -90,8 +84,16 @@
 				publicMethods.set(key,value);
 			},
 
+			 /*
+			    A object to store unregisters functions that generate when apply $scope.$watch
+			    for unnecessary judge, store the functions seperately
+			 */
+            "bindObjectReverse" : {},
+
+            "bindObjectForward" : {},
+
 			/** Bind - Make a data-binding in single way or both way
-			 * @param $scope - this param is to inject $scope service in my own opinion
+			 * @param $scope - this param is to inject $scope environment in my own opinion
 			 * @param modelKey - angular expression that will be used to get value from the $scope 
 			 * @param storageKey - the name of the localStorage item
 			 * @param direction - data-binding dirction , from model to localstorage or from localstorage to 
@@ -99,44 +101,89 @@
 
 			 */
 			bind: function($scope,modelKey,storageKey,direction){
-                
+
                 switch (direction) {
                    case 'forward' :
-                     forward();
+                     forwardBind();
                      break;
                    case 'reverse' :
-                     reverse();
+                     reverseBind();
                      break;          
+                   case 'normal' :
+                     forwardBind();
+                     reverseBind();
+                     break;                       
                    default :
-                     forward();
-                     reverse();
+                     forwardBind();
                      break;                                
                 }
 
-				function reverse(){
+				function reverseBind(){
 
-					$scope.$watch(
-						function(){return publicMethods.get(storageKey)},
-	                    function(newVal,oldVal){
-	                       $parse(modelKey).assign($scope,newVal);
-	                    },
-	                    true
-					)					
+					var tmp = $scope.$watch(
+							function(){return publicMethods.get(storageKey)},
+		                    function(newVal,oldVal){
+		                       $parse(modelKey).assign($scope,newVal);
+		                    },
+		                    true
+						)
+
+                    $parse(storageKey).assign(publicMethods.bindObjectReverse,tmp);	
+
 				}
 
-				function forward(){
+				function forwardBind(){
 
-					$scope.$watch(
-						function(){return $parse(modelKey)($scope);},
-	                    function(newVal,oldVal){
-	                    	publicMethods.set(storageKey,newVal);
-	                    },
-	                    true
-					)					
+					var tmp = $scope.$watch(
+							function(){return $parse(modelKey)($scope);},
+		                    function(newVal,oldVal){
+		                    	publicMethods.set(storageKey,newVal);
+		                    },
+		                    true
+						)
+                    
+					$parse(modelKey).assign(publicMethods.bindObjectForward,tmp);
+
 				}				
- 
+
+			},
+
+			/** unbind - cancel data-binding in single way or both way
+			 * @param $scope - this param is to inject $scope environment in my own opinion
+			 * @param modelKey - angular expression that will be used to get value from the $scope 
+			 * @param storageKey - the name of the localStorage item
+			 * @param direction - data-binding cancel dirction , from model to localstorage or from localstorage to 
+			                      model or both way 
+
+			 */
+			unbind : function($scope,modelKey,storageKey,direction){
+
+                switch (direction) {
+                   case 'forward' :
+                     forwardUnbind();
+                     break;
+                   case 'reverse' :
+                     reverseUnbind();
+                     break;          
+                   case 'normal' :
+                     forwardUnbind();
+                     reverseUnbind();
+                     break;                       
+                   default :
+                     forwardUnbind();
+                     break;                                
+                }
+
+               function reverseUnbind(){
+               	  $parse(storageKey)(publicMethods.bindObjectReverse).apply();
+               }
+
+               function forwardUnbind(){
+               	  $parse(modelKey)(publicMethods.bindObjectForward).apply();
+               }
+
 			}
-			
+					
 		};
 		return publicMethods;
 	}]);  
