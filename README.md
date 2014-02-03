@@ -7,6 +7,7 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
 
 * You can directly store Objects, Arrays, Floats, Booleans, and Strings. No need to convert your javascript values from strings.
 * No Fallback to Angular ``$cookies`` if localStorage is not supported
+* I hadn't follow the TDD rule to code this module , the test file hadn't modified
 
 ## How to use
 
@@ -31,10 +32,16 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
 
   // clear all localStorage values
   storage.clearAll();
+  
+  //make a data-binding from model to localstorage or reverse or both depend on the param direction
+  storage.bind($scope,modelKey,storageKey,dirction);
   ```
 4. About data-binding 
-  Compare with original version , I delete all the code about data-binding , for I think it difficult and confused
-  to achieve, so I give the operation to yourself. Below is example snippt:
+  Compare with original version , I had modified all the code about data-binding , for I think it difficult and     confused to achieve. 
+  ```JAVASCRIPT
+  storage.bind($scope,zero,zero,normal);
+  ```
+  Below is example snippt for data-binding if you don't use bind method:
   ```JAVASCRIPT
       $scope.storageListener = function(){
           return storage.get('zero');
@@ -54,8 +61,9 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
   ```
   The snippt purpose is to modify  localstorage.zero when $scope.zero has changed,direction is from model to 
   localstorage
-
+  
 Please add an issue with ideas, improvements, or bugs! Thanks!
+You can send me email <input type="email" value="hjj491229492@hotmail.com">
 
 ---
 
