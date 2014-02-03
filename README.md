@@ -63,7 +63,7 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
   localstorage
   
 Please add an issue with ideas, improvements, or bugs! Thanks!
-You can send me email <input type="email" value="hjj491229492@hotmail.com">
+You can send me email ``hjj491229492@hotmail.com``
 
 ---
 
