@@ -34,12 +34,12 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
   storage.clearAll();
   
   //make a data-binding from model to localstorage or reverse or both depend on the param direction
-  storage.bind($scope,modelKey,storageKey,dirction);
+  storage.bind($scope,'modelKey','storageKey','dirction');
   ```
 4. About data-binding 
   Compare with original version , I had modified all the code about data-binding , for I think it difficult and     confused. 
   ```JAVASCRIPT
-  storage.bind($scope,"zero","zero","normal");
+  storage.bind($scope,'zero','zero','normal');
   ```
   Below is example snippt for data-binding if you don't use bind method:
   ```JAVASCRIPT
@@ -55,7 +55,7 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
 
   ```JAVASCRIPT
   	  $scope.zero = 'I Love You!';
-      $scope.$watch("zero",function(newVal,oldVal){
+      $scope.$watch('zero',function(newVal,oldVal){
       	storage.update('zero',$scope.zero);
       },true)  
   ```
