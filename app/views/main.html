@@ -1,0 +1,98 @@
+<div class="container">
+<div class="row">
+	<div class="col-md-6 col-lg-6">
+		
+
+		<form action="" method="POST" class="form-horizontal" role="form">
+
+				<div class="form-group">				
+				    <span class="label label-success">the key you want to store into localstorage</span>
+				</div>			
+
+				<div class="form-group">				
+					<input type="text" class="form-control" ng-model="storeKey">
+				</div>
+
+				<div class="form-group">				
+					<input type="text" class="form-control" ng-model="storeValue">
+				</div>
+	            
+	 			<div class="form-group">					
+					<button type="button" class="btn btn-primary" ng-click="setValues()">setvalue</button>
+				</div>		
+
+				<div class="form-group">				
+				    <span class="label label-success">the key you want to get from localstorage</span>
+				</div>		
+	            
+				<div class="form-group">					
+					<input type="text" class="form-control" ng-model="getKey">
+				</div>
+
+
+				<div class="form-group">					
+					<input type="text" class="form-control" ng-model="getValue">
+				</div>
+
+
+				<div class="form-group">					
+					<button type="button" class="btn btn-primary" ng-click="getValues()">getvalue</button>
+				</div>			
+
+		</form>
+
+	</div>	
+
+<div class="col-md-5 col-md-offset-1">
+		
+
+		<form action="" method="POST" class="form-horizontal" role="form">
+
+				<div class="form-group">				
+				    <span class="label label-success">I make data-binding from storage to model, the flag is 'love'</span>
+				</div>			
+
+				<div class="form-group">					
+					<input type="text" class="form-control" ng-model="love">
+				</div>	
+
+				<div class="form-group">					
+					<button type="button" class="btn btn-primary" ng-click="bindLove()">bind</button>
+					<button type="button" class="btn btn-primary" ng-click="unBindLove()">unbind</button>
+				</div>	
+
+				<div class="form-group">				
+				    <span class="label label-success">I make data-binding from model to storage, the flag is 'kiss',watch in the chrome develop tool</span>
+				</div>			
+
+				<div class="form-group">					
+					<input type="text" class="form-control" ng-model="kiss">
+				</div>	
+
+				<div class="form-group">					
+					<button type="button" class="btn btn-primary" ng-click="bindKiss()">bind</button>
+					<button type="button" class="btn btn-primary" ng-click="unBindKiss()">unbind</button>
+				</div>	
+
+				<div class="form-group">				
+				    <span class="label label-success">which storage you want to delete</span>
+				</div>			
+
+				<div class="form-group">					
+					<input type="text" class="form-control" ng-model="removeKey">
+				</div>	
+
+				<div class="form-group">					
+					<button type="button" class="btn btn-primary" ng-click="removeValues()">remove</button>
+				</div>	
+
+				<div class="form-group">					
+					<button type="button" class="btn btn-primary" ng-click="removeAllValues()">removeALL</button>
+				</div>					
+
+		</form>
+
+	</div>		
+</div>
+	
+</div>
