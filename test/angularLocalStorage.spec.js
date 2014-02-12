@@ -5,7 +5,8 @@ describe('angularLocalStorage module', function () {
 		module('angularLocalStorage');
 
 		inject(function ($injector) {
-			storage = $injector.get('storage');
+			storage = $injector.get('localStorage');
+			sessionStorage = $injector.get('sessionStorage');
 		});
 	});
 
@@ -17,6 +18,21 @@ describe('angularLocalStorage module', function () {
 
 		beforeEach(function () {
 			testValue = storage.get('spec');
+		});
+
+		it('should store value in localStorage', function () {
+			expect(testValue).toBe('some test string');
+		});
+	});
+
+	describe('when use set() && get() methods (sessionStorage version)', function () {
+
+		beforeEach(function () {
+			sessionStorage.set('spec', 'some test string');
+		});
+
+		beforeEach(function () {
+			testValue = sessionStorage.get('spec');
 		});
 
 		it('should store value in localStorage', function () {

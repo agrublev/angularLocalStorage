@@ -6,12 +6,34 @@
 (function (window, angular, undefined) {
 	'use strict';
 
-	angular.module('angularLocalStorage', ['ngCookies']).factory('storage', ['$parse', '$cookieStore', '$window', '$log', function ($parse, $cookieStore, $window, $log) {
-		/**
-		 * Global Vars
-		 */
-		var storage = (typeof $window.localStorage === 'undefined') ? undefined : $window.localStorage;
-		var supported = typeof storage !== 'undefined';
+	/**
+	 * This method replicates the prototype of the storage factory providing
+	 * a specific storage provider.
+	 * This allows any specific storage derived factory to behave like the
+	 * generic one, minus the first storage argument of each method.
+	 * @param  {object} storageUsed - the storage provider used
+	 * @param  {object} storage     - the storage factory
+	 * @return {object}             - a new storage service
+	 */
+	function __storageCaller(storageUsed, storage) {
+		var f = {};
+		// replicate storage factory's methods with the right storage provider
+		for (var method in storage) {
+			f[method] = (function (method) {
+				return function () {
+					// add storage provider as first parameter
+					Array.prototype.unshift.call(arguments, storageUsed);
+
+					// call the method on the storage service
+					return storage[method].apply(storage, arguments);
+				};
+			})(method);
+		}
+		return f;
+	}
+
+	angular.module('angularLocalStorage', ['ngCookies'])
+	.factory('storage', ['$parse', '$cookieStore', '$window', '$log', function ($parse, $cookieStore, $window, $log) {
 
 		var privateMethods = {
 			/**
@@ -49,13 +71,13 @@
 			 * @param value - the value of the localStorage item
 			 * @returns {*} - will return whatever it is you've stored in the local storage
 			 */
-			set: function (key, value) {
-				if (!supported) {
+			set: function (storage, key, value) {
+				if (storage === $cookieStore) {
 					try {
 						$cookieStore.put(key, value);
 						return value;
 					} catch(e) {
-						$log.log('Local Storage not supported, make sure you have angular-cookies enabled.');
+						$log.log('CookieStore not supported, make sure you have angular-cookies enabled.');
 					}
 				}
 				var saver = angular.toJson(value);
@@ -68,8 +90,8 @@
 			 * @param key - the string that you set as accessor for the pair
 			 * @returns {*} - Object,String,Float,Boolean depending on what you stored
 			 */
-			get: function (key) {
-				if (!supported) {
+			get: function (storage, key) {
+				if (storage === $cookieStore) {
 					try {
 						return privateMethods.parseValue($.cookie(key));
 					} catch (e) {
@@ -85,8 +107,8 @@
 			 * @param key - the accessor value
 			 * @returns {boolean} - if everything went as planned
 			 */
-			remove: function (key) {
-				if (!supported) {
+			remove: function (storage, key) {
+				if (storage === $cookieStore) {
 					try {
 						$cookieStore.remove(key);
 						return true;
@@ -108,7 +130,7 @@
 			 * * storeName: add a custom store key value instead of using the scope variable name
 			 * @returns {*} - returns whatever the stored value is
 			 */
-			bind: function ($scope, key, opts) {
+			bind: function (storage, $scope, key, opts) {
 				var defaultOpts = {
 					defaultValue: '',
 					storeName: ''
@@ -126,22 +148,22 @@
 				var storeName = opts.storeName || key;
 
 				// If a value doesn't already exist store it as is
-				if (!publicMethods.get(storeName)) {
-					publicMethods.set(storeName, opts.defaultValue);
+				if (!publicMethods.get(storage, storeName)) {
+					publicMethods.set(storage, storeName, opts.defaultValue);
 				}
 
 				// If it does exist assign it to the $scope value
-				$parse(key).assign($scope, publicMethods.get(storeName));
+				$parse(key).assign($scope, publicMethods.get(storage, storeName));
 
 				// Register a listener for changes on the $scope value
 				// to update the localStorage value
 				$scope.$watch(key, function (val) {
 					if (angular.isDefined(val)) {
-						publicMethods.set(storeName, val);
+						publicMethods.set(storage, storeName, val);
 					}
 				}, true);
 
-				return publicMethods.get(storeName);
+				return publicMethods.get(storage, storeName);
 			},
 			/**
 			 * Unbind - let's you unbind a variable from localStorage while removing the value from both
@@ -150,21 +172,33 @@
 			 * @param key - the name of the variable you are unbinding
 			 * @param storeName - (optional) if you used a custom storeName you will have to specify it here as well
 			 */
-			unbind: function($scope,key,storeName) {
+			unbind: function(storage, $scope, key, storeName) {
 				storeName = storeName || key;
 				$parse(key).assign($scope, null);
 				$scope.$watch(key, function () { });
-				publicMethods.remove(storeName);
+				publicMethods.remove(storage, storeName);
 			},
 			/**
 			 * Clear All - let's you clear out ALL localStorage variables, use this carefully!
 			 */
-			clearAll: function() {
+			clearAll: function(storage) {
 				storage.clear();
 			}
 		};
 
 		return publicMethods;
+	}])
+
+	.factory('localStorage', ['$window', 'storage', function ($window, storage) {
+		var storageUsed = (typeof $window.localStorage === 'undefined') ? $cookieStore : $window.localStorage;
+		return new __storageCaller(storageUsed, storage);
+	}])
+
+	.factory('sessionStorage', ['$window', '$log', 'storage', function ($window, $log, storage) {
+		if (typeof $window.sessionStorage === 'undefined')
+			return $log.log('SessionStorage not supported on this browser.');
+
+		return new __storageCaller($window.sessionStorage, storage);
 	}]);
 
 })(window, window.angular);

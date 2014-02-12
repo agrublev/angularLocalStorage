@@ -21,11 +21,11 @@
     <script>
         var eS = angular.module('exampleStore', ['angularLocalStorage']);
 
-        eS.controller('MainCtrl', ['$scope', 'storage', function ( $scope, storage ) {
-            storage.bind($scope, 'test', 'Some Default Text');
+        eS.controller('MainCtrl', ['$scope', 'localStorage', function ( $scope, localStorage ) {
+            localStorage.bind($scope, 'test', 'Some Default Text');
 
             $scope.clearTest = function () {
-                storage.remove('test');
+                localStorage.remove('test');
             };
         }]);
     </script>
@@ -54,11 +54,11 @@
                 <pre>
 var eS = angular.module('exampleStore', ['angularLocalStorage']);
 
-eS.controller('MainCtrl', ['$scope', 'storage', function ( $scope, storage ) {
-    storage.bind($scope, 'test', 'Some Default Text');
+eS.controller('MainCtrl', ['$scope', 'localStorage', function ( $scope, localStorage ) {
+    localStorage.bind($scope, 'test', 'Some Default Text');
 
     $scope.clearTest = function () {
-        storage.remove('test');
+        localStorage.remove('test');
     };
 }]);
                 </pre>
