@@ -7,13 +7,25 @@
     "node_modules",
     "components",
     "test",
-    "karma.conf.js"
+    "karma.conf.js",
+    "bower_components",
+    "tests"
   ],
   "dependencies": {
-  	"angular": "~1.2.0-rc.2",
+    "angular": "~1.2.0-rc.2",
     "angular-cookies": "~1.2.0-rc.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0-rc.2"
-  }
+  },
+  "homepage": "https://github.com/agrublev/Angular-localStorage",
+  "authors": [
+    "agrublev <agrublev@gmail.com>"
+  ],
+  "description": "angular local storage module",
+  "keywords": [
+    "angular",
+    "localStorage"
+  ],
+  "license": "MIT"
 }
