@@ -11,7 +11,22 @@
 		 * Global Vars
 		 */
 		var storage = (typeof $window.localStorage === 'undefined') ? undefined : $window.localStorage;
-		var supported = typeof storage !== 'undefined';
+		var supported = !(typeof storage === 'undefined');
+
+		if (supported) {
+			// When Safari (OS X or iOS) is in private browsing mode it appears as though localStorage
+			// is available, but trying to call .setItem throws an exception below:
+			// "QUOTA_EXCEEDED_ERR: DOM Exception 22: An attempt was made to add something to storage that exceeded the quota."
+			var testKey = '__' + Math.round(Math.random() * 1e7);
+
+			try {
+				localStorage.setItem(testKey, testKey);
+				localStorage.removeItem(testKey);
+			}
+			catch (err) {
+				supported = false;
+			}
+		}
 
 		var privateMethods = {
 			/**
