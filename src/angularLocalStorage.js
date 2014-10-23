@@ -86,7 +86,7 @@
 			get: function (key) {
 				if (!supported) {
 					try {
-						return privateMethods.parseValue($.cookie(key));
+						return $cookieStore.get(key);
 					} catch (e) {
 						return null;
 					}
