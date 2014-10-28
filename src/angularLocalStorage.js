@@ -176,6 +176,12 @@
 			 */
 			clearAll: function() {
 				storage.clear();
+			},
+			/**
+			 * Check if cookie fallback is active right now
+			 */
+			isCookieFallbackActive: function() {
+				return !supported;
 			}
 		};
 
