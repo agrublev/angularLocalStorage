@@ -59,6 +59,12 @@
 
 		var publicMethods = {
 			/**
+			 * Watcher - Map for the bind $watcher
+			 * @type {Object}
+			 * @returns {Object} will return all bind $watcher
+			 */
+			watcher:{},
+			/**
 			 * Set - let's you set a new localStorage key pair set
 			 * @param key - a string that will be used as the accessor for the pair
 			 * @param value - the value of the localStorage item
@@ -150,7 +156,7 @@
 
 				// Register a listener for changes on the $scope value
 				// to update the localStorage value
-				$scope.$watch(key, function (val) {
+				this.watcher[storeName] = $scope.$watch(key, function (val) {
 					if (angular.isDefined(val)) {
 						publicMethods.set(storeName, val);
 					}
@@ -168,7 +174,7 @@
 			unbind: function($scope,key,storeName) {
 				storeName = storeName || key;
 				$parse(key).assign($scope, null);
-				$scope.$watch(key, function () { });
+				this.watcher[storeName]();
 				publicMethods.remove(storeName);
 			},
 			/**
