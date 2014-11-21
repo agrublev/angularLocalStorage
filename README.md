@@ -7,7 +7,7 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
 
 * Two way bind your $scope variable value to a localStorage key/pair which will be updated whenever the model is updated.
 * You can directly store Objects, Arrays, Floats, Booleans, and Strings. No need to convert your javascript values from strings.
-* Fallback to Angular ``$cookies`` if localStorage is not supported (REMEMBER to add ``angular-cookies.min.js`` script to your project or remove ``'ngCookies'`` from a dependency);
+* Fallback to Angular ``$cookieStore`` if localStorage is not supported (REMEMBER to add ``angular-cookies.min.js`` script to your project or remove ``'ngCookies'`` from a dependency);
 
 ## How to use
 
@@ -38,6 +38,11 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
   storage.set('key','value');
   // getting that value
   storage.get('key');
+  
+  // checking if the cookie fallback is being used right now, so you don't try to store fairly big data in cookies
+  if(!storage.isCookieFallbackActive()) {
+    ...
+  }
 
   // clear all localStorage values
   storage.clearAll();
