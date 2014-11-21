@@ -17,6 +17,7 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
 ``yourApp.controller('yourController', function( $scope, storage){``
 3. Using the ``storage`` factory
   ```JAVASCRIPT
+  // Note: if the scope variable already exists, it takes precedence over the default and stored values
   // binding it to a $scope.variable (minimal)
   storage.bind($scope,'varName');
   // binding full

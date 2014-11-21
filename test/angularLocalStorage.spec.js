@@ -56,10 +56,10 @@ describe('angularLocalStorage module', function () {
 
 				expect(testValue).toEqual(false);
 				expect(scope.spec).toBeUndefined();
-		});
+		});        
 
-		it('should store default value when passed as string', function() {
-			scope.$apply(function(){
+		it('should store default value when passed as string', function() {			
+            scope.$apply(function(){
 				storage.bind(scope,'defaultedSpec','someDefault');
 			});
 			expect(scope.defaultedSpec).toEqual('someDefault');
@@ -79,6 +79,19 @@ describe('angularLocalStorage module', function () {
 			});
 			expect(scope.customStored).toEqual('randomValue123');
 			expect(scope.directFromLocal).toEqual('randomValue123');
+		});
+        
+        it('should prefer existing scope variable over storage and default value', function() {			
+            scope.spec = 'NewValue';
+            storage.set('storedSpec', 'OldValue');
+            scope.$apply(function(){
+				storage.bind(scope, 'spec', {defaultValue: 'DefValue' ,storeName: 'storedSpec'});
+			});
+            scope.$apply(function(){
+				scope.spec = scope.spec + 'Updated';
+			});            
+            expect(scope.spec).toEqual('NewValueUpdated');
+			expect(storage.get('storedSpec')).toEqual('NewValueUpdated');			
 		});
 	});
 
