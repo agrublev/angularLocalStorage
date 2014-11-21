@@ -1,9 +1,9 @@
 {
 	"name":"angularLocalStorage",
-    "repository" : { 
-        "type" : "git",
-        "url" : "https://github.com/agrublev/angularLocalStorage.git"
-    },
+        "repository" : { 
+           "type" : "git",
+           "url" : "https://github.com/agrublev/angularLocalStorage.git"
+        },
 	"devDependencies": {
 		"karma": "~0.11.14",
 		"karma-jasmine": "~0.1",
@@ -14,6 +14,6 @@
 		"node": ">=0.10"
 	},
 	"scripts": {
-		"test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
+		"test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
 	}
 }
