@@ -86,7 +86,7 @@
 			get: function (key) {
 				if (!supported) {
 					try {
-						return privateMethods.parseValue($.cookie(key));
+						return $cookieStore.get(key);
 					} catch (e) {
 						return null;
 					}
@@ -176,6 +176,12 @@
 			 */
 			clearAll: function() {
 				storage.clear();
+			},
+			/**
+			 * Check if cookie fallback is active right now
+			 */
+			isCookieFallbackActive: function() {
+				return !supported;
 			}
 		};
 
