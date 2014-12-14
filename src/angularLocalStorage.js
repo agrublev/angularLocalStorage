@@ -1,7 +1,6 @@
-angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window', '$log', function storage($parse, $window, $log) {
-    /**
-     * Global Vars
-     */
+angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window', '$log','$location',
+    function storage($parse, $window, $log, $location) {
+
     var storage = (typeof $window.localStorage === 'undefined') ? undefined : $window.localStorage;
     var supported = !(typeof storage === 'undefined' || typeof $window.JSON === 'undefined');
 
@@ -71,7 +70,7 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
 
         /**
          * Get - let's you get the value of any pair you've stored
-         * @param key - the string that you set as accessor for the pair
+         * @param {String} key - the string that you set as accessor for the pair
          * @returns {*} - Object,String,Float,Boolean depending on what you stored
          */
         get: function (key) {
@@ -81,7 +80,7 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
 
         /**
          * getDateStamp - let's you get the datestamp stored with your value
-         * @param key - the string that you set as accessor for your value
+         * @param {String} key - the string that you set as accessor for your value
          * @returns {Date} of when the value of key was stored
          */
         getDateStamp: function (key) {
@@ -90,7 +89,7 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
 
         /**
          * Remove - let's you nuke a value from localStorage
-         * @param key - the accessor value
+         * @param {String} key - the accessor value
          * @returns {boolean} - if everything went as planned
          */
         remove: function (key) {
@@ -100,34 +99,19 @@ angular.module('angularLocalStorage', []).factory('storage', ['$parse', '$window
 
         /**
          * Bind - let's you directly bind a localStorage value to a $scope variable
-         * @param {Angular $scope} $scope - the current scope you want the variable available in
-         * @param {String} key - the name of the variable you are binding
-         * @param {Object} opts - (optional) custom options like default value or unique store name
-         * Here are the available options you can set:
-         * * defaultValue: the default value
-         * * storeName: add a custom store key value instead of using the scope variable name
+         * @param {$scope} $scope - the current scope you want the variable available in
+         * @param {String} key - the name of the variable you are binding, will be used in the localStorage key as well
+         * @param {Object} defValue - (optional) the default value
          * @returns {*} - returns whatever the stored value is
          */
-        bind: function ($scope, key, opts) {
-            var defaultOpts = {
-                defaultValue: '',
-                storeName: ''
-            };
-            // Backwards compatibility with old defaultValue string
-            if (angular.isString(opts)) {
-                opts = angular.extend({}, defaultOpts, {defaultValue:opts});
-            } else {
-                // If no defined options we use defaults otherwise extend defaults
-                opts = (angular.isUndefined(opts)) ? defaultOpts : angular.extend(defaultOpts,opts);
-            }
+        bind: function ($scope, key, defValue) {
 
             // Set the storeName key for the localStorage entry
-            // use user defined in specified
-            var storeName = opts.storeName || key;
+            var storeName = $location.url() + ':' + key;
 
             // If a value doesn't already exist store it as is
-            if (!pub.get(storeName)) {
-                pub.set(storeName, opts.defaultValue);
+            if (pub.get(storeName) === null && $scope.$eval(key) === undefined && defValue !== undefined) {
+                pub.set(storeName, defValue);
             }
 
             // If it does exist assign it to the $scope value
