@@ -1,13 +1,14 @@
 {
-    "name": "angularLocalStorage-nc",
-    "version": "0.2.2",
-    "devDependencies": {
+  "name": "angularLocalStorage-nc",
+  "version": "0.2.3",
+  "main": "src/angularLocalStorage.js",
+  "devDependencies": {
     "karma": "~0.10",
     "grunt": "~0.4.1",
-      "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-uglify": "~0.2.4",
     "karma-jasmine": "~0.1"
   },
   "scripts": {
-      "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
   }
 }
