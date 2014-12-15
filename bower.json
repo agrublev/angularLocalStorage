@@ -1,6 +1,6 @@
 {
   "name": "angularLocalStorage-nc",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "main": "src/angularLocalStorage.js",
   "ignore": [
     "**/.*",
