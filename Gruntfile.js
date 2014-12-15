@@ -23,4 +23,4 @@ module.exports = function(grunt) {
 //    grunt.registerTask('test', ['jshint', 'qunit']);  //TODO add karma tests
 
     grunt.registerTask('default', ['uglify']);
-}
+};
