@@ -62,6 +62,11 @@ or
 bower install git://github.com/agrublev/angularLocalStorage.git
 ```
 
+## Angular Requirements
+0.3.0 requires AngularJS 1.3.0+.
+
+0.2.0 requires AngularJS 1.2.x.
+
 ## Example
 
 For live example please checkout - http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=preview
@@ -72,5 +77,5 @@ Please add an issue with ideas, improvements, or bugs! Thanks!
 
 ---
 
-(c) 2013 MIT License
+(c) 2015 MIT License
 
