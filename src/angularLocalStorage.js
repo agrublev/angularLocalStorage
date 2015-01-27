@@ -11,7 +11,7 @@
 		 * Global Vars
 		 */
 		var storage = (typeof $window.localStorage === 'undefined') ? undefined : $window.localStorage;
-		var supported = !(typeof storage === 'undefined');
+		var supported = (typeof storage !== 'undefined');
         var watchers = {};
 
 		if (supported) {
@@ -200,6 +200,30 @@
 			 */
 			isCookieFallbackActive: function() {
 				return !supported;
+			},
+
+			/**
+			 * Allows the caller to obtain all the keys that are saved in Cookies or LocalStorage. Gets all the keys
+			 * that are saved in LocalStorage or Cookie.
+			 *
+			 * Uses: String.trim() - ECMAScript 1.5+
+			 *
+			 * @returns array
+			 */
+			getKeys: function() {
+				var keys = [];
+
+				if(!supported) {
+					var cookieArr = document.cookie.split(';');
+					for( var cnt = 0, cntLen = cookieArr.length; cnt < cntLen; ++cnt) {
+						keys.push(cookieArr[cnt].split('=')[0].trim());
+					}
+				} else {
+					for (var i = 0, len = localStorage.length; i < len; ++i) {
+						keys.push(localStorage.key(i));
+					}
+				}
+				return keys;
 			}
 		};
 
