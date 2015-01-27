@@ -49,7 +49,7 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
   storage.clearAll();
 
   // gets all the keys in the storage system returned as an array
-  storage.getStorageKeys(); // ['key','key2']
+  storage.getKeys(); // ['key','key2']
   ```
 
 ## Bower

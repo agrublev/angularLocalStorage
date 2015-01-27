@@ -203,15 +203,14 @@
 			},
 
 			/**
-			 * Allows the caller to obtain all the keys that are saved in Cookies or LocalStorage. Pulls all the keys
-			 * that are saved in LocalStorage if LocalStorage is supported. Otherwise it will pull all the keys that
-			 * are saved in the browser cookies and return those.
+			 * Allows the caller to obtain all the keys that are saved in Cookies or LocalStorage. Gets all the keys
+			 * that are saved in LocalStorage or Cookie.
 			 *
 			 * Uses: String.trim() - ECMAScript 1.5+
 			 *
 			 * @returns array
 			 */
-			getStorageKeys: function() {
+			getKeys: function() {
 				var keys = [];
 
 				if(!supported) {

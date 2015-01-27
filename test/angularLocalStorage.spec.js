@@ -147,7 +147,7 @@ describe('angularLocalStorage module', function () {
 		});
 	});
 
-	describe('when use getStorageKeys() method all should be returned', function () {
+	describe('when use getKeys() method all should be returned', function () {
 
 		beforeEach(function () {
 			storage.set('abcKey', 'some test string');
@@ -155,10 +155,10 @@ describe('angularLocalStorage module', function () {
 		});
 
 		beforeEach(function () {
-			array = storage.getStorageKeys();
+			array = storage.getKeys();
 		});
 
-		it('should return null for value in localStorage', function () {
+		it('should return an array equaling the length of two', function () {
 			expect(array.length).toEqual(2);
 		});
 	});
