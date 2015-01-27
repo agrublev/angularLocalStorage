@@ -70,6 +70,8 @@
        * @returns {*} - will return whatever it is you've stored in the local storage
        */
       set: function (key, value) {
+        // Remove spaces from the front and back of key
+        key = key.trim();
         if (!supported) {
           try {
             $cookieStore.put(key, value);
