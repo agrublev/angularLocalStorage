@@ -161,5 +161,10 @@ describe('angularLocalStorage module', function () {
 		it('should return an array equaling the length of two', function () {
 			expect(array.length).toEqual(2);
 		});
+
+		it('should return the same keys that were put into storage', function() {
+			expect(array.indexOf("key123")).toBeGreaterThan(-1);
+			expect(array.indexOf("abcKey")).toBeGreaterThan(-1);
+		});
 	});
 });
