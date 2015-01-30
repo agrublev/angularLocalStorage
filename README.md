@@ -72,7 +72,7 @@ bower install git://github.com/agrublev/angularLocalStorage.git
 
 ## Example
 
-For live example please checkout - http://plnkr.co/edit/Y1mrNVRkInCItqvZXtto?p=preview
+For live example please checkout - http://plnkr.co/edit/PNLjDEaRKtpLgGZMJypk?p=preview
 
 ## Suggestions?
 
