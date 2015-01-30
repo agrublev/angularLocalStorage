@@ -24,6 +24,10 @@ describe('angularLocalStorage module', function () {
     it('should store value in localStorage', function () {
       expect(testValue).toBe('some test string');
     });
+
+    it('should return null when unset key is used', function () {
+      expect(storage.get('madeUpKey')).toBeNull();
+    });
   });
 
   describe('when bind() $scope field to localStorage', function () {
