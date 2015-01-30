@@ -39,6 +39,9 @@ The simpliest localStorage module you will ever use. Allowing you to set, get, a
   storage.set('key','value');
   // getting that value
   storage.get('key');
+
+  // Getting an unset key will return null
+  console.log(storage.get('keyThatIsUndefined')) // null
   
   // checking if the cookie fallback is being used right now, so you don't try to store fairly big data in cookies
   if(!storage.isCookieFallbackActive()) {
