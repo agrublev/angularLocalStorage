@@ -1,10 +1,10 @@
 {
   "name": "angularLocalStorage",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "dist/angularLocalStorage.min.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/agrublev/angularLocalStorage.git"
+    "url": "https://github.com/timyllym/angularLocalStorage.git"
   },
   "devDependencies": {
     "karma": "~0.11.14",
